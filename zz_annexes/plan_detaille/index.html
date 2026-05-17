@@ -1,0 +1,2127 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Mathieu Lanoë">
+      
+      
+      
+        <link rel="prev" href="../../j2_tp_final/">
+      
+      
+        <link rel="next" href="../cmd_vs_powershell/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Plan détaillé - Formation Powershell 2 jours</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#plan-detaille-heure-par-heure" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Formation Powershell 2 jours" class="md-header__button md-logo" aria-label="Formation Powershell 2 jours" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Formation Powershell 2 jours
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plan détaillé
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Emyel/Powershell-Formation-2jours" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Formation Powershell 2 jours" class="md-nav__button md-logo" aria-label="Formation Powershell 2 jours" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Formation Powershell 2 jours
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Emyel/Powershell-Formation-2jours" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jour 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Jour 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_01_fondations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_02_triforce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    La Triforce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_03_pipeline_objets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline & Objets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_04_variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_05_collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_ex1_variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💪 Exercice 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_06_operateurs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opérateurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_07_manipulation_objets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulation d'objets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_ex2_objets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💪 Exercice 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_08_import_export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import / Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j1_ex3_import_export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💪 Exercice 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jour 2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Jour 2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_01_scripts_fonctions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripts & Fonctions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_02_structures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Structures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_03_construire_code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Construire son code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_04_parametres/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paramètres avancés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_ex4_structures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💪 Exercice 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_05_outputs_canaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Outputs & canaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_06_erreurs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestion d'erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_07_beautify/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Splatting & Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_ex5_production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💪 Exercice 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_08_shouldprocess/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SupportsShouldProcess
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_09_help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comment-Based Help
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_10_guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j2_tp_final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎯 TP Final
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Annexes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan détaillé
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan détaillé
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jour-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jour 1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jour 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matin-0900-1230-pause-15-min-vers-1045" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matin (09:00 → 12:30 — pause 15 min vers 10:45)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apres-midi-1330-1700-pause-15-min-vers-1515" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Après-midi (13:30 → 17:00 — pause 15 min vers 15:15)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jour-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jour 2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jour 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matin-0900-1230-pause-15-min-vers-1045_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matin (09:00 → 12:30 — pause 15 min vers 10:45)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apres-midi-1330-1700-pause-15-min-vers-1515_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Après-midi (13:30 → 17:00 — pause 15 min vers 15:15)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-formateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes formateur
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Notes formateur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blocs-compressibles-si-retard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Blocs compressibles si retard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocs-non-negociables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Blocs NON négociables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timing-libere-suite-suppression-pester" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Timing libéré suite suppression Pester
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repartition-pedagogique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Répartition pédagogique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conseils-animation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 Conseils animation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variantes-possibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variantes possibles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variantes possibles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formation-15-jour-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formation 1,5 jour (réduction)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formation-25-jours-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formation 2,5 jours (extension)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cmd_vs_powershell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMD vs PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote_powershell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remote PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../credentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credentials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jour-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jour 1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jour 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matin-0900-1230-pause-15-min-vers-1045" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matin (09:00 → 12:30 — pause 15 min vers 10:45)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apres-midi-1330-1700-pause-15-min-vers-1515" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Après-midi (13:30 → 17:00 — pause 15 min vers 15:15)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jour-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jour 2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jour 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matin-0900-1230-pause-15-min-vers-1045_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matin (09:00 → 12:30 — pause 15 min vers 10:45)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apres-midi-1330-1700-pause-15-min-vers-1515_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Après-midi (13:30 → 17:00 — pause 15 min vers 15:15)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-formateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes formateur
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Notes formateur">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blocs-compressibles-si-retard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Blocs compressibles si retard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocs-non-negociables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Blocs NON négociables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timing-libere-suite-suppression-pester" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Timing libéré suite suppression Pester
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repartition-pedagogique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Répartition pédagogique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conseils-animation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 Conseils animation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variantes-possibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variantes possibles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variantes possibles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formation-15-jour-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formation 1,5 jour (réduction)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formation-25-jours-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formation 2,5 jours (extension)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="plan-detaille-heure-par-heure">Plan détaillé — heure par heure</h1>
+<p>Document à usage du <strong>formateur</strong>. Le timing est indicatif et doit être adapté au public.</p>
+<h2 id="jour-1">Jour 1</h2>
+<h3 id="matin-0900-1230-pause-15-min-vers-1045">Matin (09:00 → 12:30 — pause 15 min vers 10:45)</h3>
+<table>
+<thead>
+<tr>
+<th>Plage</th>
+<th>Durée</th>
+<th>Bloc</th>
+<th>Pages support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00 → 09:15</td>
+<td>15 min</td>
+<td>Tour de table + présentation de la formation</td>
+<td><code>index</code></td>
+</tr>
+<tr>
+<td>09:15 → 09:30</td>
+<td>15 min</td>
+<td>Intro : qu'est-ce que PowerShell, pourquoi se former</td>
+<td><code>jour1/fondations</code></td>
+</tr>
+<tr>
+<td>09:30 → 10:15</td>
+<td>45 min</td>
+<td>Syntaxe <code>Verb-Noun</code> + Triforce <code>Get-Command</code> / <code>Get-Help</code> / <code>Get-Member</code></td>
+<td><code>jour1/triforce</code></td>
+</tr>
+<tr>
+<td>10:15 → 10:45</td>
+<td>30 min</td>
+<td>Pipeline &amp; langage objet (ByValue / ByPropertyName)</td>
+<td><code>jour1/pipeline_objets</code></td>
+</tr>
+<tr>
+<td>10:45 → 11:00</td>
+<td>15 min</td>
+<td><strong>Pause</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>11:00 → 11:30</td>
+<td>30 min</td>
+<td>Variables, typage, propriétés/méthodes</td>
+<td><code>jour1/variables</code></td>
+</tr>
+<tr>
+<td>11:30 → 12:00</td>
+<td>30 min</td>
+<td>Array, Hashtable, PSCustomObject, variables auto</td>
+<td><code>jour1/collections</code></td>
+</tr>
+<tr>
+<td>12:00 → 12:15</td>
+<td>15 min</td>
+<td><strong>💪 Exercice 1 — Variables &amp; Collections</strong></td>
+<td><code>jour1/exercice_variables</code></td>
+</tr>
+<tr>
+<td>12:15 → 12:30</td>
+<td>15 min</td>
+<td>Correction exercice 1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="apres-midi-1330-1700-pause-15-min-vers-1515">Après-midi (13:30 → 17:00 — pause 15 min vers 15:15)</h3>
+<table>
+<thead>
+<tr>
+<th>Plage</th>
+<th>Durée</th>
+<th>Bloc</th>
+<th>Pages support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>13:30 → 14:00</td>
+<td>30 min</td>
+<td>Opérateurs (comparaison, logique, type, arithmétique, <code>-f</code>)</td>
+<td><code>jour1/operateurs</code></td>
+</tr>
+<tr>
+<td>14:00 → 14:45</td>
+<td>45 min</td>
+<td>Manipulation d'objets : Where / Select / Sort / Group / ForEach</td>
+<td><code>jour1/manipulation_objets</code></td>
+</tr>
+<tr>
+<td>14:45 → 15:05</td>
+<td>20 min</td>
+<td><strong>💪 Exercice 2 — Opérateurs &amp; Manipulation objets</strong></td>
+<td><code>jour1/exercice_objets</code></td>
+</tr>
+<tr>
+<td>15:05 → 15:15</td>
+<td>10 min</td>
+<td>Correction exercice 2</td>
+<td></td>
+</tr>
+<tr>
+<td>15:15 → 15:30</td>
+<td>15 min</td>
+<td><strong>Pause</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>15:30 → 16:00</td>
+<td>30 min</td>
+<td>Import / Export (CSV, JSON, CliXml)</td>
+<td><code>jour1/import_export</code></td>
+</tr>
+<tr>
+<td>16:00 → 16:15</td>
+<td>15 min</td>
+<td><strong>💪 Exercice 3 — Import/Export</strong></td>
+<td><code>jour1/exercice_import_export</code></td>
+</tr>
+<tr>
+<td>16:15 → 16:30</td>
+<td>15 min</td>
+<td>Correction exercice 3</td>
+<td></td>
+</tr>
+<tr>
+<td>16:30 → 17:00</td>
+<td>30 min</td>
+<td>Synthèse J1, questions, preview J2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="jour-2">Jour 2</h2>
+<h3 id="matin-0900-1230-pause-15-min-vers-1045_1">Matin (09:00 → 12:30 — pause 15 min vers 10:45)</h3>
+<table>
+<thead>
+<tr>
+<th>Plage</th>
+<th>Durée</th>
+<th>Bloc</th>
+<th>Pages support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>09:00 → 09:15</td>
+<td>15 min</td>
+<td>Récap J1, questions</td>
+<td></td>
+</tr>
+<tr>
+<td>09:15 → 09:35</td>
+<td>20 min</td>
+<td>Scripts vs Fonctions, Execution Policy</td>
+<td><code>jour2/scripts_fonctions</code></td>
+</tr>
+<tr>
+<td>09:35 → 10:15</td>
+<td>40 min</td>
+<td>Structures de contrôle (if, foreach, while, switch, break/continue)</td>
+<td><code>jour2/structures</code></td>
+</tr>
+<tr>
+<td>10:15 → 10:30</td>
+<td>15 min</td>
+<td>Construire son code : squelette Inputs / Outputs / Contrôles</td>
+<td><code>jour2/construire_code</code></td>
+</tr>
+<tr>
+<td>10:30 → 10:45</td>
+<td>15 min</td>
+<td><strong>Pause</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>10:45 → 12:10</td>
+<td>85 min</td>
+<td>Paramètres avancés (Mandatory, Position, Validate*, ParameterSet, ValueFromPipeline)</td>
+<td><code>jour2/parametres</code></td>
+</tr>
+<tr>
+<td>12:10 → 12:30</td>
+<td>20 min</td>
+<td><strong>💪 Exercice 4 — Structures &amp; Paramètres</strong></td>
+<td><code>jour2/exercice_structures</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="apres-midi-1330-1700-pause-15-min-vers-1515_1">Après-midi (13:30 → 17:00 — pause 15 min vers 15:15)</h3>
+<table>
+<thead>
+<tr>
+<th>Plage</th>
+<th>Durée</th>
+<th>Bloc</th>
+<th>Pages support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>13:30 → 13:40</td>
+<td>10 min</td>
+<td>Correction exercice 4</td>
+<td></td>
+</tr>
+<tr>
+<td>13:40 → 14:10</td>
+<td>30 min</td>
+<td>Outputs structurés : PSCustomObject + 6 canaux (Verbose / Warning / Information / Debug)</td>
+<td><code>jour2/outputs_canaux</code></td>
+</tr>
+<tr>
+<td>14:10 → 14:40</td>
+<td>30 min</td>
+<td>Gestion d'erreurs : Try / Catch / Finally + types d'exception</td>
+<td><code>jour2/erreurs</code></td>
+</tr>
+<tr>
+<td>14:40 → 15:00</td>
+<td>20 min</td>
+<td>Splatting + Format operator + Type Accelerators</td>
+<td><code>jour2/beautify</code></td>
+</tr>
+<tr>
+<td>15:00 → 15:20</td>
+<td>20 min</td>
+<td><strong>💪 Exercice 5 — Outputs, Erreurs, Splatting</strong></td>
+<td><code>jour2/exercice_production</code></td>
+</tr>
+<tr>
+<td>15:20 → 15:30</td>
+<td>10 min</td>
+<td><strong>Pause</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>15:30 → 15:50</td>
+<td>20 min</td>
+<td>SupportsShouldProcess : WhatIf / Confirm</td>
+<td><code>jour2/shouldprocess</code></td>
+</tr>
+<tr>
+<td>15:50 → 16:05</td>
+<td>15 min</td>
+<td>Comment-Based Help</td>
+<td><code>jour2/help</code></td>
+</tr>
+<tr>
+<td>16:05 → 16:20</td>
+<td>15 min</td>
+<td>Guidelines &amp; PSScriptAnalyzer</td>
+<td><code>jour2/guidelines</code></td>
+</tr>
+<tr>
+<td>16:20 → 16:50</td>
+<td>30 min</td>
+<td><strong>🎯 TP Final — Get-ComputerInfo</strong></td>
+<td><code>jour2/tp_final</code></td>
+</tr>
+<tr>
+<td>16:50 → 17:00</td>
+<td>10 min</td>
+<td>Correction TP final, conclusion, questions</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="notes-formateur">Notes formateur</h2>
+<h3 id="blocs-compressibles-si-retard">⚠️ Blocs compressibles si retard</h3>
+<ul>
+<li>Opérateur <code>-f</code> (10 min) → donner cheat-sheet</li>
+<li>Compare-Object (5 min) → survol rapide ou skip</li>
+<li>Type Accelerators (10 min) → donner exemples sans détailler</li>
+</ul>
+<h3 id="blocs-non-negociables">✅ Blocs NON négociables</h3>
+<ul>
+<li>Try / Catch (essentiel production)</li>
+<li>PSCustomObject (retour de fonctions)</li>
+<li>Paramètres Mandatory / Validate* (qualité du code)</li>
+<li>Pipeline ValueFromPipeline (réutilisabilité)</li>
+</ul>
+<h3 id="timing-libere-suite-suppression-pester">🎯 Timing libéré suite suppression Pester</h3>
+<p><strong>25 min récupérées</strong> → utilisées pour :
+- Renforcer ShouldProcess (+5 min, passé de 15 à 20 min)
+- Renforcer Guidelines/PSScriptAnalyzer (+5 min, passé de 10 à 15 min)
+- Marge de sécurité (+15 min répartis sur J2)</p>
+<h3 id="repartition-pedagogique">📊 Répartition pédagogique</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Durée totale</th>
+<th>%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cours magistral</td>
+<td>~9h00</td>
+<td>65%</td>
+</tr>
+<tr>
+<td>Exercices pratiques</td>
+<td>~2h30</td>
+<td>18%</td>
+</tr>
+<tr>
+<td>Pauses</td>
+<td>~1h15</td>
+<td>9%</td>
+</tr>
+<tr>
+<td>Questions / Ajustements</td>
+<td>~1h15</td>
+<td>9%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conseils-animation">💡 Conseils animation</h3>
+<ul>
+<li><strong>Exercices</strong> : ne PAS donner la solution avant le temps écoulé (même si tout le monde a fini)</li>
+<li><strong>TP Final</strong> : valoriser les approches partielles, ne pas exiger la perfection</li>
+<li><strong>Questions</strong> : noter les questions "avancées" pour y répondre en fin de session</li>
+<li><strong>Rythme</strong> : mieux vaut finir 15 min en avance que bâcler la fin</li>
+</ul>
+<h2 id="variantes-possibles">Variantes possibles</h2>
+<h3 id="formation-15-jour-reduction">Formation 1,5 jour (réduction)</h3>
+<p>Supprimer :
+- Opérateur <code>-f</code> (donner cheat-sheet)
+- Compare-Object
+- Type Accelerators
+- SupportsShouldProcess (mentionner juste l'existence)</p>
+<h3 id="formation-25-jours-extension">Formation 2,5 jours (extension)</h3>
+<p>Ajouter :
+- Pester (45 min — tests unitaires avec démo)
+- Modules (30 min — créer son module)
+- REST APIs (45 min — Invoke-RestMethod)
+- Workshops optionnels (JSON consolidation, AD Users)</p>
+<p>| 15:00 → 15:15 | 15 min | <strong>Pause</strong> | |
+| 15:15 → 16:00 | 45 min | Splatting + Format Operator + Type Accelerators | <code>jour2/beautify</code> |
+| 16:00 → 16:20 | 20 min | <code>SupportsShouldProcess</code> (<code>-WhatIf</code> / <code>-Confirm</code>) | <code>jour2/shouldprocess</code> |
+| 16:20 → 16:40 | 20 min | Comment-Based Help | <code>jour2/help</code> |
+| 16:40 → 17:00 | 20 min | Pester en 5 minutes + Guidelines &amp; PSScriptAnalyzer | <code>jour2/pester</code> + <code>jour2/guidelines</code> |
+| (optionnel) | | <strong>TP final</strong> : workshop Computer Info | <code>jour2/exercices</code> |</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<blockquote>
+<p>Si on a du temps en plus
+- Pousser sur le <strong>TP final</strong> (workshop Computer Info) en J2 après-midi.
+- Sinon, donner le TP en exercice "à la maison" avec correction en début de session suivante (si formation Niv.3 enchaînée).
+!!!</p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<blockquote>
+<p>Si on a moins de temps
+Les blocs à compresser en priorité :
+- Opérateurs (donner en cheat-sheet).
+- Compare-Object (rare en pratique).
+- Foreach-Object <strong>vs</strong> mot-clé foreach (à traiter dans <code>structures</code> uniquement).</p>
+</blockquote>
+<p>Le bloc à <strong>ne jamais sacrifier</strong> : Try / Catch et PSCustomObject.
+!!!</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
