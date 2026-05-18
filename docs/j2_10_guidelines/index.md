@@ -1,4 +1,3 @@
-
 # Les Guidelines PowerShell
 
 ## Règles de base
@@ -32,15 +31,41 @@ Verbes approuvés (`Get-Verb`), au singulier, + nom au singulier.
 ❌ `Create-Password` (verbe non approuvé)
 ✅ `New-Password`
 
-### Éviter `Write-Host`
+### `Write-Host` — quand l'utiliser, quand l'éviter
 
-Préférez :
+`Write-Host` écrit directement dans la console et **casse le pipeline** : sa sortie ne peut pas être capturée, redirigée ou traitée par la commande suivante.
 
-- `Write-Output` (ou laisser tomber l'objet dans le pipeline) pour les données.
-- `Write-Verbose` pour les messages de progression / debug.
+Dans une **fonction réutilisable**, préférez toujours :
+
+- `Write-Output` (ou laisser l'objet tomber dans le pipeline) pour les données.
+- `Write-Verbose` pour les messages de progression.
+- `Write-Warning` pour les anomalies non bloquantes.
 - `Write-Information` pour les messages informatifs filtrables.
 
-`Write-Host` écrit **directement dans la console** et casse le pipeline. Historiquement, c'était la seule façon d'afficher du texte coloré, mais `Write-Information` + `Write-Host` coloré ne doivent être utilisés que pour des scripts interactifs, jamais dans des fonctions réutilisables.
+```powershell
+# ❌ Casse le pipeline — $result sera vide
+$Result = Get-ComputerInfo -ComputerName SRV01 | Where-Object { $_.OSVersion -like "*2022*" }
+# (si Get-ComputerInfo utilise Write-Host au lieu de retourner un objet)
+
+# ✅ L'objet circule dans le pipeline
+function Get-ComputerInfo {
+    [CmdletBinding()]
+    param ([string]$ComputerName)
+
+    Write-Verbose "Interrogation de $ComputerName"   # progression
+    [PSCustomObject]@{ ComputerName = $ComputerName; OSVersion = "..." }   # donnée
+}
+```
+
+**Les cas légitimes de `Write-Host`** existent néanmoins :
+
+- **Scripts interactifs** destinés à être lus par un humain en direct (menus, assistants pas-à-pas), où le pipeline n'est pas utilisé.
+- **Affichage coloré** dans un script de démo ou d'onboarding (`-ForegroundColor Green`).
+- **Environnements contraints** comme Azure Automation Runbooks ou certains outils de CI/CD qui n'exposent que la sortie console — dans ces cas, `Write-Host` est parfois le seul moyen d'émettre un message visible.
+
+!!! tip "La règle simple"
+    Bibliothèque de fonctions, module, code réutilisable → **jamais de `Write-Host`**.
+    Script one-shot interactif, démo, outil de diagnostic → `Write-Host` est acceptable avec modération.
 
 ### Variables en PascalCase
 
@@ -155,4 +180,5 @@ Invoke-ScriptAnalyzer -Path . -Settings .\PSScriptAnalyzerSettings.psd1
 - Alias / param positionnels → **jamais dans un script**.
 - Nommage : `Verb-Noun`, PascalCase, singulier.
 - Indentation : VSCode le fait pour vous.
+- `Write-Host` → interdit dans les fonctions réutilisables, acceptable dans les scripts interactifs.
 - **PSScriptAnalyzer** : activé dès le début, corrigé avant commit.

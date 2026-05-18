@@ -1,4 +1,3 @@
-
 # Array, Hashtable, PSCustomObject
 
 ## Array — liste de valeurs
@@ -17,7 +16,7 @@ $Ints[0..2]   # Plage (premiers 3 éléments)
 ```
 
 >[!IMPORTANT]
-> Piège du `+=` `$Array += "valeur"` paraît anodin mais **recrée intégralement le tableau à chaque ajout** (les arrays .NET sont immutables). 
+> Piège du `+=` `$Array += "valeur"` paraît anodin mais **recrée intégralement le tableau à chaque ajout** (les arrays .NET sont immutables).
 > À éviter dès qu'on traite plus de quelques dizaines d'éléments.
 
 Alternatives :
@@ -38,6 +37,26 @@ $Env = @{
 $Env["PROD"]   # → "SERVER-PROD"
 $Env.PROD      # → "SERVER-PROD" (syntaxe propriété)
 ```
+
+Une hashtable classique **ne garantit pas l'ordre** des clés. Si l'ordre d'affichage ou d'itération compte, utiliser `[ordered]` :
+
+```powershell
+$Env = [ordered]@{
+    PROD = "SERVER-PROD"
+    DEV  = "SERVER-DEV"
+    HOM  = "SERVER-HOM"
+}
+
+# Les clés sont toujours restituées dans l'ordre de déclaration
+$Env.Keys   # → PROD, DEV, HOM
+```
+
+!!! tip "Hashtable vs `[ordered]` vs PSCustomObject"
+    - **`@{}`** : usage général, lookup par clé, paramètres de splatting. L'ordre des clés n'est pas garanti.
+    - **`[ordered]@{}`** : même usage, mais ordre garanti. Utile pour les rapports, les exports, ou simplement la lisibilité du débogage.
+    - **`[PSCustomObject]@{}`** : sortie structurée d'une fonction. Ordre garanti, affichage en colonnes, compatible `Export-Csv` / `ConvertTo-Json` / `Sort-Object`.
+
+    En pratique : splatting → `@{}`, sortie de fonction → `[PSCustomObject]@{}`, entre les deux → `[ordered]@{}`.
 
 ## PSCustomObject — objet personnalisé
 

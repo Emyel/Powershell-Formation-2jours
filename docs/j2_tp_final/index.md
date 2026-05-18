@@ -49,10 +49,10 @@ Get-CimInstance -ComputerName <name> -ClassName Win32_Processor
 ### Récupérer l'espace disque C:
 
 ```powershell
-$Session = New-CimSession -ComputerName <name>
-Get-Volume -CimSession $Session -DriveLetter C
-Remove-CimSession $Session
+Get-CimInstance -ComputerName <name> -ClassName Win32_LogicalDisk -Filter "DeviceID='C:'"
 ```
+
+Les propriétés utiles sont `FreeSpace` (octets) et `Size` (octets).
 
 
 ## Bonus 1 (optionnel)
@@ -239,19 +239,16 @@ function Get-ComputerInfo {
             Write-Verbose "Interrogation de $Computer"
 
             try {
-                $OS  = Get-CimInstance -ComputerName $Computer -ClassName Win32_OperatingSystem -ErrorAction Stop
-                $CPU = Get-CimInstance -ComputerName $Computer -ClassName Win32_Processor -ErrorAction Stop
-
-                $Session = New-CimSession -ComputerName $Computer -ErrorAction Stop
-                $Volume  = Get-Volume -CimSession $Session -DriveLetter C -ErrorAction Stop
-                Remove-CimSession $Session
+                $OS   = Get-CimInstance -ComputerName $Computer -ClassName Win32_OperatingSystem -ErrorAction Stop
+                $CPU  = Get-CimInstance -ComputerName $Computer -ClassName Win32_Processor -ErrorAction Stop
+                $Disk = Get-CimInstance -ComputerName $Computer -ClassName Win32_LogicalDisk -Filter "DeviceID='C:'" -ErrorAction Stop
 
                 [PSCustomObject]@{
                     ComputerName = $OS.CSName
                     OSVersion    = "$($OS.Caption) $($OS.Version)"
                     CPUCores     = $CPU.NumberOfCores
                     RAMTotalGB   = [math]::Round($OS.TotalVisibleMemorySize / 1MB, 2)
-                    DiskFreeGB   = [math]::Round($Volume.SizeRemaining / 1GB, 2)
+                    DiskFreeGB   = [math]::Round($Disk.FreeSpace / 1GB, 2)
                 }
             }
             catch {

@@ -1,4 +1,3 @@
-
 # Variables
 
 Une variable est un emplacement mémoire identifié par un nom, un type et une valeur. En PowerShell, elle est précédée du signe `$`.
@@ -64,6 +63,50 @@ La syntaxe `$(...)` empêche que l'expression `$Service.Status` ne soit interpr�
 | `$PSCommandPath` | Chemin complet du script en cours. |
 | `$PROFILE` | Chemin vers le profil utilisateur (chargé à chaque ouverture de console). |
 | `$HOME` | Dossier personnel de l'utilisateur. |
+
+## `$null` — pièges de comparaison
+
+`$null` est une valeur spéciale qui représente l'absence de valeur. Elle se comporte de manière surprenante dans certains cas.
+
+**Piège 1 — ordre des opérandes**
+
+Quand le membre gauche d'une comparaison est une collection, PowerShell filtre la collection plutôt que de renvoyer un booléen :
+
+```powershell
+$Resultats = Get-ADUser -Filter { Department -eq "IT" }   # peut renvoyer $null si aucun résultat
+
+# ❌ À éviter : si $Resultats est une collection, PowerShell filtre et renvoie [] au lieu de $false
+if ($Resultats -eq $null) { "Aucun résultat" }
+
+# ✅ À privilégier : $null à gauche force une vraie comparaison booléenne
+if ($null -eq $Resultats) { "Aucun résultat" }
+```
+
+La règle est simple : **`$null` toujours à gauche** dans une comparaison d'égalité.
+
+**Piège 2 — variable non initialisée**
+
+Une variable non déclarée vaut `$null` — pas d'erreur, juste un comportement silencieux :
+
+```powershell
+if ($null -eq $MaVariable) {
+    "Variable non initialisée ou explicitement nulle"
+}
+```
+
+**Piège 3 — `$null` dans une collection**
+
+`$null` peut se retrouver dans un tableau sans que ce soit évident :
+
+```powershell
+$Liste = "A", $null, "B"
+$Liste.Count        # → 3
+$Liste -ne $null    # → @("A", "B")  (filtre les nulls)
+```
+
+!!! tip "Bonne pratique"
+    Toujours mettre `$null` à gauche de l'opérateur de comparaison.
+    PSScriptAnalyzer signale automatiquement les violations de cette règle (`PSPossibleIncorrectComparisonWithNull`).
 
 ## Variables d'environnement
 
