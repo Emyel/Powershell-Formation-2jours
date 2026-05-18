@@ -14,6 +14,9 @@ Le code consistera ensuite à **entourer ces commandes** de :
 - contrôle d'erreur,
 - formatage des données renvoyées.
 
+**Exemple** : un script qui désactive des comptes AD va *orchestrer* plusieurs opérations (lire un CSV, appeler une fonction de désactivation, journaliser). 
+La désactivation elle-même est une fonction réutilisable.
+
 ## Le squelette en 3 piliers
 
 **Inputs** — paramètres validés, typés, nommés.
@@ -21,8 +24,7 @@ Le code consistera ensuite à **entourer ces commandes** de :
 **Contrôles** — gestion d'erreurs, verbosité, debug.
 
 ```powershell
-function Verb-Noun
-{
+function Verb-Noun {
     [CmdletBinding()]
     param (
         # === INPUTS : paramètres validés ===
@@ -30,35 +32,21 @@ function Verb-Noun
         [string]$ComputerName
     )
 
-    begin {
-        # === CONTRÔLES : initialisation, logs ===
-        Write-Verbose "Start $($MyInvocation.MyCommand)"
-    }
+    # === CŒUR DU CODE ===
+    $Data = Get-CimInstance -ComputerName $ComputerName -ClassName Win32_OperatingSystem
 
-    process {
-        try {
-            # === CŒUR DU CODE ===
-            $Data = Get-CimInstance -ComputerName $ComputerName -ClassName ... -ErrorAction Stop
-
-            # === OUTPUTS : un objet structuré ===
-            [PSCustomObject]@{
-                ComputerName = $ComputerName
-                Property1    = $Data.Property1
-            }
-        }
-        catch {
-            # === CONTRÔLES : gestion d'erreur ===
-            Write-Warning "Échec pour $ComputerName : $($_.Exception.Message)"
-        }
-    }
-
-    end {
-        Write-Verbose "End $($MyInvocation.MyCommand)"
+    # === OUTPUTS : un objet structuré ===
+    [PSCustomObject]@{
+        ComputerName = $ComputerName
+        OSVersion    = $Data.Caption
     }
 }
 ```
 
-C'est **ce squelette** qu'on va remplir progressivement dans les chapitres suivants : paramètres validés, outputs en `PSCustomObject`, canaux Verbose/Warning, Try/Catch, etc.
+!!! note "Et la gestion d'erreurs ? Et le pipeline ?"
+    Ce squelette est volontairement simplifié. Dans les pages suivantes,
+    on va l'enrichir avec les blocs `begin`/`process`/`end`,
+    `ValueFromPipeline`, `Try/Catch` et les canaux `Verbose`/`Warning`.
 
 ## Fonction ou script ?
 

@@ -15,7 +15,6 @@ Dans votre terminal, tapez ce que vous voulez. **Dans un script** :
 
 ```powershell
 gci c:\temp
-Get-ChildItem c:\temp
 ```
 
 ✅ À privilégier :

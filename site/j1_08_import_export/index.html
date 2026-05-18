@@ -1471,10 +1471,10 @@
 <span class="nv">$Creds</span> <span class="p">=</span> <span class="nb">Import-Clixml</span> <span class="s2">&quot;$HOME\creds.xml&quot;</span>
 </code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-</div>
-<p>Le fichier ne sera <strong>déchiffrable que par le même utilisateur sur la même machine</strong>. C'est très bien pour un compte de service sur une machine, c'est inutilisable pour partager des creds entre deux postes.</p>
+<p class="admonition-title">Le fichier ne sera <strong>déchiffrable que par le même utilisateur sur la même machine</strong></p>
+<p>C'est très bien pour un compte de service sur une machine, c'est inutilisable pour partager des creds entre deux postes.</p>
 <p>Pour des cas plus avancés (équipe, multi-machines), regarder les modules <code>Microsoft.PowerShell.SecretManagement</code> et <code>Microsoft.PowerShell.SecretStore</code>.</p>
+</div>
 
 
 

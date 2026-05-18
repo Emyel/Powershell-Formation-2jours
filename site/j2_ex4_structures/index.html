@@ -872,6 +872,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#44-accepter-le-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 — Accepter le pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1393,6 +1404,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#44-accepter-le-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 — Accepter le pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1443,6 +1465,8 @@
 <li>Affiche "Volume réglé à X%"</li>
 </ol>
 <p><strong>Indice</strong> : <code>[ValidateRange(0,100)]</code></p>
+<h2 id="44-accepter-le-pipeline">4.4 — Accepter le pipeline</h2>
+<p>Modifiez <code>Get-ServiceReport</code> pour qu'elle accepte les noms de services <strong>depuis le pipeline</strong> :</p>
 <details>
 <summary><strong>Solutions</strong></summary>
 
@@ -1507,6 +1531,12 @@
 <span class="nb">Set-Volume</span> <span class="n">-Level</span> <span class="n">75</span>
 <span class="nb">Set-Volume</span> <span class="n">-Level</span> <span class="n">150</span>  <span class="c"># → Erreur de validation</span>
 </code></pre></div>
+
+### Solution 4.4
+
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;Spooler&quot;</span><span class="p">,</span> <span class="s2">&quot;WinRM&quot;</span> <span class="p">|</span> <span class="nb">Get-ServiceReport</span>
+</code></pre></div>
+
 
 </details>
 

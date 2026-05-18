@@ -40,6 +40,11 @@ Créez une fonction `Set-Volume` qui :
 **Indice** : `[ValidateRange(0,100)]`
 
 
+## 4.4 — Accepter le pipeline
+
+Modifiez `Get-ServiceReport` pour qu'elle accepte les noms de services **depuis le pipeline** :
+
+
 <details>
 <summary><strong>Solutions</strong></summary>
 
@@ -107,5 +112,12 @@ function Set-Volume {
 Set-Volume -Level 75
 Set-Volume -Level 150  # → Erreur de validation
 ```
+
+### Solution 4.4
+
+```powershell
+"Spooler", "WinRM" | Get-ServiceReport
+```
+
 
 </details>

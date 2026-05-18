@@ -1559,10 +1559,10 @@ Opération « Supprimer » en cours sur la cible « C:\temp\fichier1.log ».
 <li>Envoient des emails.</li>
 <li>Font des changements irréversibles.</li>
 </ul>
-<div class="admonition danger mauvaise pratique">
-<p class="admonition-title">Danger</p>
-</div>
+<div class="admonition danger">
+<p class="admonition-title">Mauvaise pratique</p>
 <p>Coder un <code>if ($WhatIf)</code> manuel dans les paramètres. PowerShell gère ça nativement avec <code>SupportsShouldProcess</code> — c'est standardisé, attendu par les utilisateurs, et intégré aux pipelines.</p>
+</div>
 <h2 id="impact-high">Impact = High</h2>
 <p>Par défaut, <code>-Confirm</code> ne se déclenche que si l'impact de la commande est considéré "élevé". On peut forcer cet impact :</p>
 <div class="highlight"><pre><span></span><code><span class="p">[</span><span class="k">CmdletBinding</span><span class="p">(</span><span class="n">SupportsShouldProcess</span><span class="p">,</span> <span class="n">ConfirmImpact</span> <span class="p">=</span> <span class="s1">&#39;High&#39;</span><span class="p">)]</span>

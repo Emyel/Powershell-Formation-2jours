@@ -1687,7 +1687,6 @@
 <p>Dans votre terminal, tapez ce que vous voulez. <strong>Dans un script</strong> :</p>
 <p>❌ À éviter :</p>
 <div class="highlight"><pre><span></span><code><span class="nb">gci </span><span class="n">c</span><span class="p">:\</span><span class="n">temp</span>
-<span class="nb">Get-ChildItem</span> <span class="n">c</span><span class="p">:\</span><span class="n">temp</span>
 </code></pre></div>
 <p>✅ À privilégier :</p>
 <div class="highlight"><pre><span></span><code><span class="nb">Get-ChildItem</span> <span class="n">-Path</span> <span class="s2">&quot;C:\temp&quot;</span>
@@ -1764,15 +1763,14 @@ PSAvoidUsingPositionalParameters    Warning      script.ps1   23  Avoid using po
 <div class="highlight"><pre><span></span><code><span class="nb">Invoke-ScriptAnalyzer</span> <span class="n">-Path</span> <span class="p">.\</span><span class="n">MonScript</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-Fix</span>
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Workflow recommandé</p>
+<ol>
+<li>Écrire le code.</li>
+<li>Lancer <code>Invoke-ScriptAnalyzer</code>.</li>
+<li>Corriger les warnings <strong>avant</strong> de committer.</li>
+<li>Intégrer PSScriptAnalyzer en CI/CD pour bloquer les PRs avec des violations.</li>
+</ol>
 </div>
-<blockquote>
-<p>Workflow recommandé
-1. Écrire le code.
-2. Lancer <code>Invoke-ScriptAnalyzer</code>.
-3. Corriger les warnings <strong>avant</strong> de committer.
-4. Intégrer PSScriptAnalyzer en CI/CD pour bloquer les PRs avec des violations.</p>
-</blockquote>
 <h3 id="personnaliser-les-regles">Personnaliser les règles</h3>
 <p>Créer un fichier <code>PSScriptAnalyzerSettings.psd1</code> :</p>
 <div class="highlight"><pre><span></span><code><span class="p">@{</span>

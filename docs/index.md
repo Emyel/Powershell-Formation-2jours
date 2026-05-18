@@ -35,6 +35,8 @@ Pas de prérequis fort : il faut savoir ouvrir une console et avoir une idée de
 - Ratio cible : ~50% théorie, 50% pratique.
 
 !!! tip "Environnement"
-    - PowerShell 5.1 minimum, **7.x recommandé**.
-    - Éditeur : **VSCode** + extension PowerShell.
-    - Modules à installer dès l'ouverture : `PSScriptAnalyzer`.
+    - PowerShell 5.1 minimum, **7.x recommandé**
+    - Éditeur : **VSCode** + extension PowerShell
+    - Modules à installer dès l'ouverture : `PSScriptAnalyzer`
+    
+    
