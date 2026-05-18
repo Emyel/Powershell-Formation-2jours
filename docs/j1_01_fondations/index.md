@@ -1,31 +1,98 @@
+# Qu'est-ce que PowerShell ?
 
-# Jour 1 — Matin
+**PowerShell** est un shell et un langage d'automatisation conçu par Microsoft.
 
-## Bloc 1 — Fondations
+Comme Bash ou CMD, il permet d'exécuter des commandes et d'automatiser des tâches système.
 
-### Qu'est-ce que PowerShell ?
+Mais contrairement aux shells traditionnels qui manipulent principalement du **texte**, PowerShell manipule des **objets**.
 
-**PowerShell** est avant tout un shell : une interface utilisateur permettant de traduire les commandes utilisateur en exécution au niveau du système.
+C'est la différence fondamentale à comprendre.
 
-Contrairement à Bash ou CMD qui sont des shells **textes** (ils manipulent des chaînes), PowerShell est un shell **objet** : chaque commande renvoie des objets typés avec leurs propriétés et leurs méthodes. C'est la différence fondamentale dont découle tout le reste.
+| Shell texte | Shell objet |
+|---|---|
+| Manipule des chaînes de caractères | Manipule des objets .NET |
+| Nécessite souvent du parsing texte | Accès direct aux propriétés |
+| Fragile aux changements d'affichage | Structuré et prédictible |
 
-### Pourquoi se former à PowerShell ?
+Exemple :
 
-- [x] **Interopérable** avec tout l'écosystème Microsoft et avec les APIs tierces (REST, .NET, COM).
-- [x] **Productivité** : une action manuelle sur 1 élément vs une action scriptée sur 1 000 éléments — le ROI est immédiat.
-- [x] **Standardisation** : une fois le code écrit, l'action est rejouable à l'identique, sans oubli ni mauvaise manipulation.
-- [x] **Universel** : depuis PowerShell 7, le moteur est cross-platform (Windows, Linux, macOS).
+CMD :
 
-### PowerShell 5.1 vs 7.x — lequel utiliser ?
+```cmd
+tasklist
+```
 
-| | PowerShell 5.1 | PowerShell 7.x |
-| --- | --- | --- |
-| Installation | Inclus dans Windows 10/11 et Server 2016+ | À installer (winget, MSI) |
+PowerShell :
+
+```powershell
+Get-Process
+```
+
+Dans PowerShell, les résultats retournés possèdent :
+- des propriétés,
+- des méthodes,
+- un type.
+
+Cette approche rend le pipeline PowerShell extrêmement puissant.
+
+---
+
+## Pourquoi apprendre PowerShell ?
+
+- [x] Automatiser des tâches répétitives
+- [x] Administrer Windows efficacement
+- [x] Interagir avec Microsoft 365, Azure et Active Directory
+- [x] Manipuler des APIs REST et des services cloud
+- [x] Gérer des centaines de machines comme une seule
+
+!!! info "PowerShell est partout"
+    Aujourd'hui, PowerShell est utilisé aussi bien :
+    
+    - en administration système,
+    - en cybersécurité,
+    - en DevOps,
+    - en cloud,
+    - en scripting d'entreprise.
+
+---
+
+## PowerShell 5.1 vs PowerShell 7
+
+| | PowerShell 5.1 | PowerShell 7 |
+|---|---|---|
+| Inclus dans Windows | Oui | Non |
 | Cross-platform | Non | Oui |
-| Performance | Correcte | Notablement meilleure |
-| Nouveautés (`-Parallel`, opérateurs `??`/`?.`, etc.) | Non | Oui |
+| Basé sur | .NET Framework | .NET |
+| Performance | Correcte | Meilleure |
+| Nouvelles fonctionnalités | Limitées | Oui |
 
-**Recommandation** : 7.x si possible. 5.1 reste indispensable pour certains modules (ActiveDirectory historique, certains modules Exchange on-prem).
+### Recommandation
+
+- Utilisez **PowerShell 7** pour les nouveaux projets.
+- Gardez **PowerShell 5.1** pour certains anciens modules Microsoft.
+
+Exemples :
+- ancien module ActiveDirectory,
+- certains modules Exchange On-Prem,
+- outils historiques Microsoft.
+
+---
+
+## Windows PowerShell vs PowerShell 7
+
+| Windows PowerShell | PowerShell 7 |
+|---|---|
+| `powershell.exe` | `pwsh.exe` |
+| Windows uniquement | Windows / Linux / macOS |
+| Technologie historique | Version moderne |
+
+Afficher votre version :
+
+```powershell
+$PSVersionTable
+```
+
+---
 
 ## Execution Policy
 
@@ -33,18 +100,50 @@ PowerShell protège l'exécution des scripts via une **Execution Policy**.
 
 | Policy | Description |
 |---|---|
-| `Restricted` | Aucune exécution de script. |
-| `AllSigned` | Tous les scripts doivent être signés. |
-| `RemoteSigned` | Les scripts téléchargés doivent être signés. |
-| `Bypass` | Aucune restriction. |
+| `Restricted` | Aucun script autorisé |
+| `AllSigned` | Tous les scripts doivent être signés |
+| `RemoteSigned` | Les scripts téléchargés doivent être signés |
+| `Bypass` | Désactive les restrictions |
+
+### Configuration recommandée
 
 ```powershell
-# Bon défaut sur un poste de dev
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 
-# Vérifier la politique en vigueur
+Afficher les policies actives :
+
+```powershell
 Get-ExecutionPolicy -List
 ```
 
-!!! warning "La liberté ne doit pas peser sur la sécurité"
-    Configurer `Bypass` à l'échelle de la machine est une mauvaise pratique. Préférez `-Scope CurrentUser` ou utilisez `Bypass` uniquement en CLI/CI.
+!!! warning "Bonne pratique"
+    Évitez `Bypass` à l'échelle machine.
+
+    Préférez :
+    - `RemoteSigned`
+    - le scope `CurrentUser`
+    - ou un bypass temporaire en CI/CD.
+
+---
+
+## Environnement recommandé
+
+Aujourd'hui, l'environnement recommandé pour travailler avec PowerShell est :
+
+- VS Code
+- Windows Terminal
+- Extension PowerShell Microsoft
+
+Avantages :
+- autocomplétion,
+- coloration syntaxique,
+- terminal intégré,
+- debugging,
+- formatage automatique,
+- analyse de bonnes pratiques.
+
+!!! tip "Conseil"
+    Évitez l'ancien PowerShell ISE.
+    
+    Il n'est plus activement développé.

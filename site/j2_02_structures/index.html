@@ -1474,6 +1474,14 @@
     <span class="s2">&quot;Condition non remplie&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>PS7+ — opérateur ternaire</strong></p>
+<p>Pour les conditions simples, une syntaxe compacte inspirée du C# :</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$Status</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$Service</span><span class="p">.</span><span class="n">Status</span> <span class="o">-eq</span> <span class="s2">&quot;Running&quot;</span><span class="p">)</span> <span class="p">?</span> <span class="s2">&quot;✅ Actif&quot;</span> <span class="p">:</span> <span class="s2">&quot;❌ Arrêté&quot;</span>
+</code></pre></div>
+<p>Réservé aux cas où la condition <strong>et</strong> les deux valeurs sont courtes. Dès que c'est complexe, préférer le <code>if/else</code> classique pour la lisibilité.</p>
+</div>
 <h2 id="foreach">FOREACH</h2>
 <div class="highlight"><pre><span></span><code><span class="nv">$Names</span> <span class="p">=</span> <span class="p">@(</span><span class="s1">&#39;Mathieu&#39;</span><span class="p">,</span><span class="s1">&#39;Julien&#39;</span><span class="p">,</span><span class="s1">&#39;Sylvain&#39;</span><span class="p">)</span>
 

@@ -1598,7 +1598,8 @@ Script one-shot interactif, démo, outil de diagnostic → <code>Write-Host</cod
 <span class="p">{</span>
 <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
 <span class="k">param</span> <span class="p">(</span>
-<span class="no">[string[]]</span><span class="nv">$ComputerName</span><span class="p">)</span>
+<span class="no">[string[]]</span><span class="nv">$ComputerName</span>
+<span class="p">)</span>
 <span class="nb">Write-Verbose</span> <span class="s2">&quot;Start&quot;</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$Computer</span> <span class="k">in</span> <span class="nv">$ComputerName</span><span class="p">)</span>
 <span class="p">{</span>

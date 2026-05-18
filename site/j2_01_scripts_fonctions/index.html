@@ -762,17 +762,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#execution-policy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Execution Policy
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1406,17 +1395,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#execution-policy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Execution Policy
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1468,46 +1446,6 @@
 <div class="highlight"><pre><span></span><code><span class="p">.</span> <span class="s2">&quot;$PSScriptRoot\Functions.ps1&quot;</span>   <span class="c"># Toutes les fonctions deviennent disponibles</span>
 </code></pre></div>
 <p>∗<code>$PSScriptRoot</code> contient le dossier du script en cours d'exécution — indispensable pour les chemins relatifs fiables.*</p>
-<h2 id="execution-policy">Execution Policy</h2>
-<p>PowerShell protège l'exécution des scripts via une <strong>Execution Policy</strong>.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">Get-ExecutionPolicy</span> <span class="n">-List</span>
-</code></pre></div>
-<table>
-<thead>
-<tr>
-<th>Policy</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Restricted</code></td>
-<td>Aucune exécution de script.</td>
-</tr>
-<tr>
-<td><code>AllSigned</code></td>
-<td>Tous les scripts doivent être signés.</td>
-</tr>
-<tr>
-<td><code>RemoteSigned</code></td>
-<td>Les scripts téléchargés doivent être signés.</td>
-</tr>
-<tr>
-<td><code>Bypass</code></td>
-<td>Aucune restriction.</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight"><pre><span></span><code><span class="c"># Bon défaut sur un poste de dev</span>
-<span class="nb">Set-ExecutionPolicy</span> <span class="n">RemoteSigned</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-
-<span class="c"># Exécution ponctuelle depuis l&#39;extérieur</span>
-<span class="n">powershell</span><span class="p">.</span><span class="n">exe</span> <span class="n">-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="o">-File</span> <span class="s2">&quot;C:\chemin\monscript.ps1&quot;</span>
-</code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">La liberté ne doit pas peser sur la sécurité</p>
-<p>Configurer <code>Bypass</code> à l'échelle de la machine est une mauvaise pratique. Préférez <code>-Scope CurrentUser</code> ou utilisez <code>Bypass</code> uniquement en CLI/CI.</p>
-</div>
 
 
 

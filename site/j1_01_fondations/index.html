@@ -417,6 +417,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#execution-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution Policy
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1429,6 +1440,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#execution-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution Policy
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1494,6 +1516,44 @@
 </tbody>
 </table>
 <p><strong>Recommandation</strong> : 7.x si possible. 5.1 reste indispensable pour certains modules (ActiveDirectory historique, certains modules Exchange on-prem).</p>
+<h2 id="execution-policy">Execution Policy</h2>
+<p>PowerShell protège l'exécution des scripts via une <strong>Execution Policy</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Policy</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Restricted</code></td>
+<td>Aucune exécution de script.</td>
+</tr>
+<tr>
+<td><code>AllSigned</code></td>
+<td>Tous les scripts doivent être signés.</td>
+</tr>
+<tr>
+<td><code>RemoteSigned</code></td>
+<td>Les scripts téléchargés doivent être signés.</td>
+</tr>
+<tr>
+<td><code>Bypass</code></td>
+<td>Aucune restriction.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c"># Bon défaut sur un poste de dev</span>
+<span class="nb">Set-ExecutionPolicy</span> <span class="n">RemoteSigned</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
+
+<span class="c"># Vérifier la politique en vigueur</span>
+<span class="nb">Get-ExecutionPolicy</span> <span class="n">-List</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">La liberté ne doit pas peser sur la sécurité</p>
+<p>Configurer <code>Bypass</code> à l'échelle de la machine est une mauvaise pratique. Préférez <code>-Scope CurrentUser</code> ou utilisez <code>Bypass</code> uniquement en CLI/CI.</p>
+</div>
 
 
 

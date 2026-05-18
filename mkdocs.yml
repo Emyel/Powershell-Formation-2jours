@@ -48,7 +48,6 @@ nav:
     - Guidelines: j2_10_guidelines/index.md
     - 🎯 TP Final: j2_tp_final/index.md
   - Annexes:
-    - Plan détaillé: zz_annexes/plan_detaille.md
     - CMD vs PowerShell: zz_annexes/cmd_vs_powershell.md
     - Remote PowerShell: zz_annexes/remote_powershell.md
     - Credentials: zz_annexes/credentials.md
