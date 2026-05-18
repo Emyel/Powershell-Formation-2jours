@@ -58,7 +58,7 @@ La syntaxe `$(...)` empêche que l'expression `$Service.Status` ne soit interpr�
 | `$null` | Valeur nulle / indéfinie. |
 | `$error` | Liste des erreurs de la session ; `$error[0]` = la plus récente. |
 | `$_` / `$PSItem` | Objet courant dans un pipeline (`Where-Object`, `ForEach-Object`). |
-| `$args` | Arguments non nommés passés à un script ou une fonction. |
+| `$args` | Arguments non nommés passés à un script ou une fonction simple. ⚠️ Toujours vide dans une fonction avancée (`[CmdletBinding()]` + `param()`). |
 | `$PSScriptRoot` | Dossier du script en cours — **indispensable** pour les chemins relatifs. |
 | `$PSCommandPath` | Chemin complet du script en cours. |
 | `$PROFILE` | Chemin vers le profil utilisateur (chargé à chaque ouverture de console). |

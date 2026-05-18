@@ -26,3 +26,25 @@ Contrairement à Bash ou CMD qui sont des shells **textes** (ils manipulent des 
 | Nouveautés (`-Parallel`, opérateurs `??`/`?.`, etc.) | Non | Oui |
 
 **Recommandation** : 7.x si possible. 5.1 reste indispensable pour certains modules (ActiveDirectory historique, certains modules Exchange on-prem).
+
+## Execution Policy
+
+PowerShell protège l'exécution des scripts via une **Execution Policy**.
+
+| Policy | Description |
+|---|---|
+| `Restricted` | Aucune exécution de script. |
+| `AllSigned` | Tous les scripts doivent être signés. |
+| `RemoteSigned` | Les scripts téléchargés doivent être signés. |
+| `Bypass` | Aucune restriction. |
+
+```powershell
+# Bon défaut sur un poste de dev
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# Vérifier la politique en vigueur
+Get-ExecutionPolicy -List
+```
+
+!!! warning "La liberté ne doit pas peser sur la sécurité"
+    Configurer `Bypass` à l'échelle de la machine est une mauvaise pratique. Préférez `-Scope CurrentUser` ou utilisez `Bypass` uniquement en CLI/CI.

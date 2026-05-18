@@ -17,9 +17,15 @@ Vue d'ensemble compacte des opérateurs PowerShell. Une cheat-sheet à conserver
 | `-eq` | Égalité (insensible à la casse par défaut) |
 | `-like` | Wildcard (`*` et `?`) — `"Texte" -like "Text*"` |
 | `-match` | Regex — `$_ -match "^A"` |
+| `-in` | Présence d'une valeur dans une liste — `"A" -in @("A","B","C")` |
+| `-notin` | Inverse de `-in` |
 
 Préfixer par `c` rend sensible à la casse : `-ceq`, `-clike`, ...
 Préfixer par `not` inverse : `-notlike`, `-notmatch`, ...
+
+`$Admins = @("Prue","Piper","Phoebe")`
+`"Prue" -in $Admins      # → $true`
+`"Paige"  -notin $Admins   # → $true`
 
 ## Comparaison de collections
 

@@ -15,9 +15,9 @@ $Ints[-1]     # Dernier élément
 $Ints[0..2]   # Plage (premiers 3 éléments)
 ```
 
->[!IMPORTANT]
-> Piège du `+=` `$Array += "valeur"` paraît anodin mais **recrée intégralement le tableau à chaque ajout** (les arrays .NET sont immutables).
-> À éviter dès qu'on traite plus de quelques dizaines d'éléments.
+!!! IMPORTANT 
+    Piège du `+=` `$Array += "valeur"` paraît anodin mais **recrée intégralement le tableau à chaque ajout** (les arrays .NET sont immutables).
+    À éviter dès qu'on traite plus de quelques dizaines d'éléments.
 
 Alternatives :
 - Affecter directement une boucle : `$Result = foreach (...) { ... }`.

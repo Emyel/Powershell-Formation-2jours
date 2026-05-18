@@ -18,6 +18,17 @@ else
 }
 ```
 
+!!! note
+    **PS7+ — opérateur ternaire**
+
+    Pour les conditions simples, une syntaxe compacte inspirée du C# :
+
+    ```powershell
+    $Status = ($Service.Status -eq "Running") ? "✅ Actif" : "❌ Arrêté"
+    ```
+
+    Réservé aux cas où la condition **et** les deux valeurs sont courtes. Dès que c'est complexe, préférer le `if/else` classique pour la lisibilité.
+
 ## FOREACH
 
 ```powershell

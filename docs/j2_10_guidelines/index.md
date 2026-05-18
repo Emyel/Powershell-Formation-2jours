@@ -85,7 +85,8 @@ function Get-ComputerStatus
 {
 [CmdletBinding()]
 param (
-[string[]]$ComputerName)
+[string[]]$ComputerName
+)
 Write-Verbose "Start"
 foreach ($Computer in $ComputerName)
 {

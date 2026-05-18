@@ -39,29 +39,3 @@ Le **dot sourcing** est notamment utile pour charger une bibliothèque de foncti
 ```
 
 ∗`$PSScriptRoot` contient le dossier du script en cours d'exécution — indispensable pour les chemins relatifs fiables.*
-
-## Execution Policy
-
-PowerShell protège l'exécution des scripts via une **Execution Policy**.
-
-```powershell
-Get-ExecutionPolicy -List
-```
-
-| Policy | Description |
-| --- | --- |
-| `Restricted` | Aucune exécution de script. |
-| `AllSigned` | Tous les scripts doivent être signés. |
-| `RemoteSigned` | Les scripts téléchargés doivent être signés. |
-| `Bypass` | Aucune restriction. |
-
-```powershell
-# Bon défaut sur un poste de dev
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-# Exécution ponctuelle depuis l'extérieur
-powershell.exe -ExecutionPolicy Bypass -File "C:\chemin\monscript.ps1"
-```
-
-!!! warning "La liberté ne doit pas peser sur la sécurité"
-    Configurer `Bypass` à l'échelle de la machine est une mauvaise pratique. Préférez `-Scope CurrentUser` ou utilisez `Bypass` uniquement en CLI/CI.

@@ -47,17 +47,31 @@ function Verb-Noun {
     on va l'enrichir avec les blocs `begin`/`process`/`end`,
     `ValueFromPipeline`, `Try/Catch` et les canaux `Verbose`/`Warning`.
 
-## Les blocs `begin` / `process` / `end`
+## Les blocs begin / process / end
 
-Ces trois blocs structurent l'exécution d'une fonction qui reçoit des objets **depuis le pipeline**.
+Une fonction avancée peut structurer son code en trois blocs distincts :
 
-| Bloc | Quand s'exécute-t-il ? | Usage typique |
+| Bloc | Exécution | Usage typique |
 |---|---|---|
-| `begin` | Une seule fois, avant le premier objet | Initialisation, connexion, log de démarrage |
-| `process` | Une fois **par objet** reçu du pipeline | Le cœur du traitement — là où la logique vit |
-| `end` | Une seule fois, après le dernier objet | Nettoyage, déconnexion, log de fin |
+| `begin` | Une seule fois, avant tout | Initialisation, connexions, logs de démarrage |
+| `process` | Une fois **par objet reçu** du pipeline | Le cœur du traitement, là où `$_` / `$PSItem` est disponible |
+| `end` | Une seule fois, après tout | Nettoyage, résumé, fermeture de connexions |
 
-Sans ces blocs, le corps de la fonction s'exécute une seule fois avec **tous** les objets d'un coup — ce qui casse le streaming pipeline.
+```powershell
+function Demo-Blocs {
+    [CmdletBinding()]
+    param ([string[]]$Name)
+
+    begin   { Write-Verbose "Démarrage" }
+    process { foreach ($N in $Name) { "Traitement : $N" } }
+    end     { Write-Verbose "Fin" }
+}
+
+"Alice","Bob" | Demo-Blocs -Verbose
+```
+
+!!! tip
+    Sans ces blocs, tout le code est implicitement dans `end` — ce qui signifie que si la fonction reçoit des objets du pipeline un par un, elle attend de tous les avoir reçus avant de s'exécuter. Les blocs `process` permettent le **streaming** : chaque objet est traité au fur et à mesure.
 
 ```powershell
 function Get-OSVersion {
