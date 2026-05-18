@@ -59,4 +59,3 @@ $Creds = Import-Clixml "$HOME\creds.xml"
 Le fichier ne sera **déchiffrable que par le même utilisateur sur la même machine**. C'est très bien pour un compte de service sur une machine, c'est inutilisable pour partager des creds entre deux postes.
 
 Pour des cas plus avancés (équipe, multi-machines), regarder les modules `Microsoft.PowerShell.SecretManagement` et `Microsoft.PowerShell.SecretStore`.
-!!!

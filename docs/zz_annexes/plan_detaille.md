@@ -133,7 +133,6 @@ Ajouter :
 > Si on a du temps en plus
 > - Pousser sur le **TP final** (workshop Computer Info) en J2 après-midi.
 > - Sinon, donner le TP en exercice "à la maison" avec correction en début de session suivante (si formation Niv.3 enchaînée).
-!!!
 
 !!! warning 
 > Si on a moins de temps
@@ -143,4 +142,3 @@ Ajouter :
 > - Foreach-Object **vs** mot-clé foreach (à traiter dans `structures` uniquement).
 
 Le bloc à **ne jamais sacrifier** : Try / Catch et PSCustomObject.
-!!!

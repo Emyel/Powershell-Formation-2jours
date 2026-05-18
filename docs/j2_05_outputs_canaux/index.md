@@ -1,3 +1,6 @@
+---
+title: Outputs & canaux
+---
 
 # Outputs structurés & canaux de sortie
 
@@ -32,6 +35,39 @@ foreach ($Computer in $ComputerList) {
 ```
 
 **Pourquoi c'est mauvais ?** Les arrays .NET sont **immutables**. Chaque `+=` recrée un nouveau tableau et recopie tous les éléments précédents → **O(n²)**. Sur 10 000 éléments, c'est catastrophique.
+
+### Mesurer la performance — `Measure-Command`
+
+`Measure-Command` permet de chronométrer l'exécution d'une commande ou d'un bloc de code.
+
+```powershell
+# Méthode inefficace
+Measure-Command {
+    $Result = @()
+    foreach ($i in 1..1000) {
+        $Result += $i
+    }
+}
+```
+
+```
+TotalMilliseconds : 287.4532
+```
+
+```powershell
+# Méthode efficace
+Measure-Command {
+    $Result = foreach ($i in 1..1000) {
+        $i
+    }
+}
+```
+
+```
+TotalMilliseconds : 4.2156
+```
+
+**Résultat** : l'affectation directe est **70× plus rapide** sur 1000 éléments. L'écart empire avec la taille.
 
 ### ✅ Recommandé : affecter la boucle directement
 
@@ -111,7 +147,39 @@ Ou via les paramètres des commandes :
 Get-Example -Verbose -WarningAction SilentlyContinue -InformationAction Continue
 ```
 
-!!! tip 
-> Pourquoi c'est important
-> Ces canaux structurent la sortie de votre code. Un script de production émet du **Verbose** pour le suivi, des **Warning** pour signaler des anomalies non bloquantes, des **Error** pour les échecs, et retourne des **objets** dans le canal Success. Jamais de `Write-Host` en prod.
-!!!
+## Enregistrer une session complète — `Start-Transcript`
+
+`Start-Transcript` enregistre **tout** ce qui se passe dans la console dans un fichier texte : les commandes, les sorties, les erreurs.
+
+```powershell
+Start-Transcript -Path "C:\Logs\Session_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"
+
+# Vos commandes ici
+Get-Service
+Get-Process
+
+Stop-Transcript
+```
+
+**Cas d'usage** :
+- **Audit** : garder une trace complète d'une intervention manuelle.
+- **Debugging** : capturer un problème intermittent.
+- **Formation** : enregistrer une démo complète.
+
+**Bonnes pratiques** :
+- Toujours encadrer dans un `try/finally` pour garantir l'appel à `Stop-Transcript` même en cas d'erreur.
+- Nommer le fichier avec un timestamp pour éviter les écrasements.
+
+```powershell
+try {
+    Start-Transcript -Path "$HOME\Logs\$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"
+    
+    # Votre code ici
+    
+} finally {
+    Stop-Transcript
+}
+```
+
+!!! tip "Pourquoi c'est important"
+    Ces canaux structurent la sortie de votre code. Un script de production émet du **Verbose** pour le suivi, des **Warning** pour signaler des anomalies non bloquantes, des **Error** pour les échecs, et retourne des **objets** dans le canal Success. Jamais de `Write-Host` en prod.

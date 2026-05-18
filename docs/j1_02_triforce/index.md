@@ -46,7 +46,6 @@ Get-Help Get-Service -Online   # ouvre la page Microsoft Docs
 
 !!! tip 
 > Mettre à jour l'aide locale : `Update-Help` (en admin) télécharge la dernière version de l'aide pour toutes les commandes installées.
-!!!
 
 ### `Get-Member` — connaître un objet
 

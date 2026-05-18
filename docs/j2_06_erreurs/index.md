@@ -1,3 +1,6 @@
+---
+title: Gestion d'erreurs
+---
 
 # Gestion d'erreurs — Try / Catch / Finally
 
@@ -5,10 +8,10 @@
 
 PowerShell distingue deux types :
 
-**Non-Terminating**
+**Non-Terminating**  
 Une erreur est émise mais le code continue.
 
-**Terminating**
+**Terminating**  
 L'erreur arrête immédiatement l'exécution.
 
 ## ErrorAction & ErrorActionPreference
@@ -21,10 +24,8 @@ L'erreur arrête immédiatement l'exécution.
 | `Inquire` | Affiche l'erreur, demande confirmation. |
 | `Stop` | Transforme en **Terminating** → **catchable** dans Try/Catch. |
 
-!!! danger 
-> Erreur fréquente
-> Mettre `$ErrorActionPreference = "SilentlyContinue"` en tête de script pour "éviter les erreurs" est une **anti-pattern**. On masque les vrais problèmes au lieu de les gérer.
-!!!
+!!! danger "Erreur fréquente"
+    Mettre `$ErrorActionPreference = "SilentlyContinue"` en tête de script pour "éviter les erreurs" est une **anti-pattern**. On masque les vrais problèmes au lieu de les gérer.
 
 ## Try / Catch — principe
 
@@ -105,7 +106,71 @@ finally {
 }
 ```
 
-!!! tip 
-> Piège classique
-> On oublie souvent le `Finally` alors qu'il est crucial pour éviter les fuites de ressources (sessions, connexions, fichiers ouverts, etc.).
-!!!
+!!! tip "Piège classique"
+    On oublie souvent le `Finally` alors qu'il est crucial pour éviter les fuites de ressources (sessions, connexions, fichiers ouverts, etc.).
+
+## Gérer les programmes externes — `$LASTEXITCODE`
+
+PowerShell gère ses propres erreurs avec `Try/Catch`, mais quand vous appelez un **programme externe** (`.exe`, `.bat`, utilitaires système), il faut vérifier manuellement son **code de retour**.
+
+### Le problème
+
+```powershell
+robocopy C:\Source D:\Destination /MIR
+```
+
+Même si `robocopy` échoue, PowerShell ne déclenche **aucune exception**. Le script continue comme si de rien n'était.
+
+### La solution — `$LASTEXITCODE`
+
+Après chaque appel à un programme externe, PowerShell stocke son code de retour dans `$LASTEXITCODE`.
+
+```powershell
+robocopy C:\Source D:\Destination /MIR
+
+if ($LASTEXITCODE -ge 8) {
+    throw "Robocopy a échoué avec le code $LASTEXITCODE"
+}
+```
+
+**Codes de retour Robocopy** :
+- `0-7` : Succès (avec ou sans fichiers copiés)
+- `8+` : Échec
+
+### Exemple complet
+
+```powershell
+function Invoke-Robocopy {
+    [CmdletBinding()]
+    param (
+        [string]$Source,
+        [string]$Destination
+    )
+
+    Write-Verbose "Copie de $Source vers $Destination"
+    
+    robocopy $Source $Destination /MIR /R:3 /W:5 /NP
+    
+    if ($LASTEXITCODE -ge 8) {
+        throw "Robocopy a échoué (code $LASTEXITCODE)"
+    }
+    
+    Write-Verbose "Copie terminée (code $LASTEXITCODE)"
+}
+```
+
+### Différence avec `$?`
+
+| Variable | Signification |
+| --- | --- |
+| `$?` | `$true` si la **dernière commande PowerShell** a réussi, `$false` sinon. |
+| `$LASTEXITCODE` | Code de retour numérique du **dernier programme externe** exécuté. |
+
+`$?` ne fonctionne **pas** pour les programmes externes — utilisez toujours `$LASTEXITCODE`.
+
+!!! warning "Cas courants nécessitant $LASTEXITCODE"
+    - `robocopy`, `xcopy`
+    - `git`, `svn`
+    - `netsh`, `wmic`
+    - `msiexec`, `setup.exe`
+    - Scripts `.bat` / `.cmd`

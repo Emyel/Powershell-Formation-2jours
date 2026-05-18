@@ -8,7 +8,6 @@
 
 !!! tip Règle d'or
 Si vous répétez **au moins deux fois** le même bloc de code pour une même opération, ce bloc doit devenir une fonction.
-!!!
 
 ## Paramètres d'un script
 
@@ -64,4 +63,3 @@ powershell.exe -ExecutionPolicy Bypass -File "C:\chemin\monscript.ps1"
 
 !!! warning
 Configurer `Bypass` à l'échelle de la machine est une mauvaise pratique. Préférez `-Scope CurrentUser` ou utilisez `Bypass` uniquement en CLI/CI.
-!!!

@@ -28,7 +28,6 @@ $Creds     = New-Object System.Management.Automation.PSCredential($User, $PwdSec
 !!! danger 
 > Attention
 > Mettre un mot de passe en clair dans un script est une **très mauvaise pratique**. À utiliser uniquement pour des tests locaux temporaires.
-!!!
 
 ## Stockage chiffré sur disque (DPAPI)
 

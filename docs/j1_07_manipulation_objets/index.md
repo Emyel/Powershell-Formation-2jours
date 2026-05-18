@@ -85,7 +85,6 @@ Get-ChildItem E:\ -Directory | ForEach-Object {
 > - `ForEach-Object` (commande) : **streame** les objets du pipeline au fur et à mesure.
 > - `foreach (...)` (structure, vue en J2) : charge tout en mémoire avant de boucler.
 > PS7+ : `ForEach-Object -Parallel { ... }` permet le multi-threading.
-!!!
 
 ## Compare-Object — **comparer**
 

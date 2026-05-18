@@ -136,7 +136,6 @@ Invoke-ScriptAnalyzer -Path .\MonScript.ps1 -Fix
 > 2. Lancer `Invoke-ScriptAnalyzer`.
 > 3. Corriger les warnings **avant** de committer.
 > 4. Intégrer PSScriptAnalyzer en CI/CD pour bloquer les PRs avec des violations.
-!!!
 
 ### Personnaliser les règles
 

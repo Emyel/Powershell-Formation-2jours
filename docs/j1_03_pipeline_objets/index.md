@@ -57,4 +57,3 @@ Get-Help Stop-Process -Parameter Name
 !!! NOTE
 > Pourquoi c'est important ?
 > C'est en comprenant **ByValue / ByPropertyName** qu'on passe du copier-coller au scripting autonome. La plupart des "magies" du pipeline reposent là-dessus.
-!!!

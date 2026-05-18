@@ -66,4 +66,3 @@ $Computer | Add-Member -MemberType NoteProperty -Name RAM -Value "512Mo"
 > - Compatible nativement avec `Export-Csv`, `ConvertTo-Json`, `Sort-Object`, etc.
 >
 > C'est ce qu'on retournera systématiquement depuis nos fonctions en J2.
-!!!

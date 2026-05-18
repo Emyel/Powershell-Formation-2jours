@@ -94,7 +94,6 @@ Si `-Confirm` est présent, `ShouldProcess` affiche un prompt et renvoie `$true`
 
 !!! danger Mauvaise pratique
 Coder un `if ($WhatIf)` manuel dans les paramètres. PowerShell gère ça nativement avec `SupportsShouldProcess` — c'est standardisé, attendu par les utilisateurs, et intégré aux pipelines.
-!!!
 
 ## Impact = High
 
