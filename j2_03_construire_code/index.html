@@ -1478,35 +1478,49 @@ La désactivation elle-même est une fonction réutilisable.</p>
 on va l'enrichir avec les blocs <code>begin</code>/<code>process</code>/<code>end</code>,
 <code>ValueFromPipeline</code>, <code>Try/Catch</code> et les canaux <code>Verbose</code>/<code>Warning</code>.</p>
 </div>
-<h2 id="les-blocs-begin-process-end">Les blocs <code>begin</code> / <code>process</code> / <code>end</code></h2>
-<p>Ces trois blocs structurent l'exécution d'une fonction qui reçoit des objets <strong>depuis le pipeline</strong>.</p>
+<h2 id="les-blocs-begin-process-end">Les blocs begin / process / end</h2>
+<p>Une fonction avancée peut structurer son code en trois blocs distincts :</p>
 <table>
 <thead>
 <tr>
 <th>Bloc</th>
-<th>Quand s'exécute-t-il ?</th>
+<th>Exécution</th>
 <th>Usage typique</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>begin</code></td>
-<td>Une seule fois, avant le premier objet</td>
-<td>Initialisation, connexion, log de démarrage</td>
+<td>Une seule fois, avant tout</td>
+<td>Initialisation, connexions, logs de démarrage</td>
 </tr>
 <tr>
 <td><code>process</code></td>
-<td>Une fois <strong>par objet</strong> reçu du pipeline</td>
-<td>Le cœur du traitement — là où la logique vit</td>
+<td>Une fois <strong>par objet reçu</strong> du pipeline</td>
+<td>Le cœur du traitement, là où <code>$_</code> / <code>$PSItem</code> est disponible</td>
 </tr>
 <tr>
 <td><code>end</code></td>
-<td>Une seule fois, après le dernier objet</td>
-<td>Nettoyage, déconnexion, log de fin</td>
+<td>Une seule fois, après tout</td>
+<td>Nettoyage, résumé, fermeture de connexions</td>
 </tr>
 </tbody>
 </table>
-<p>Sans ces blocs, le corps de la fonction s'exécute une seule fois avec <strong>tous</strong> les objets d'un coup — ce qui casse le streaming pipeline.</p>
+<div class="highlight"><pre><span></span><code><span class="k">function</span> <span class="n">Demo-Blocs</span> <span class="p">{</span>
+    <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
+    <span class="k">param</span> <span class="p">(</span><span class="no">[string[]]</span><span class="nv">$Name</span><span class="p">)</span>
+
+    <span class="k">begin</span>   <span class="p">{</span> <span class="nb">Write-Verbose</span> <span class="s2">&quot;Démarrage&quot;</span> <span class="p">}</span>
+    <span class="k">process</span> <span class="p">{</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$N</span> <span class="k">in</span> <span class="nv">$Name</span><span class="p">)</span> <span class="p">{</span> <span class="s2">&quot;Traitement : $N&quot;</span> <span class="p">}</span> <span class="p">}</span>
+    <span class="k">end</span>     <span class="p">{</span> <span class="nb">Write-Verbose</span> <span class="s2">&quot;Fin&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="s2">&quot;Alice&quot;</span><span class="p">,</span><span class="s2">&quot;Bob&quot;</span> <span class="p">|</span> <span class="n">Demo-Blocs</span> <span class="n">-Verbose</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Sans ces blocs, tout le code est implicitement dans <code>end</code> — ce qui signifie que si la fonction reçoit des objets du pipeline un par un, elle attend de tous les avoir reçus avant de s'exécuter. Les blocs <code>process</code> permettent le <strong>streaming</strong> : chaque objet est traité au fur et à mesure.</p>
+</div>
 <div class="highlight"><pre><span></span><code><span class="k">function</span> <span class="nb">Get-OSVersion</span> <span class="p">{</span>
     <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
     <span class="k">param</span> <span class="p">(</span>

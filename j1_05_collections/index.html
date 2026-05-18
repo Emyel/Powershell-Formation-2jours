@@ -1459,11 +1459,11 @@
 <span class="nv">$Ints</span><span class="p">[-</span><span class="n">1</span><span class="p">]</span>     <span class="c"># Dernier élément</span>
 <span class="nv">$Ints</span><span class="p">[</span><span class="n">0</span><span class="p">..</span><span class="n">2</span><span class="p">]</span>   <span class="c"># Plage (premiers 3 éléments)</span>
 </code></pre></div>
-<blockquote>
-<p>[!IMPORTANT]
-Piège du <code>+=</code> <code>$Array += "valeur"</code> paraît anodin mais <strong>recrée intégralement le tableau à chaque ajout</strong> (les arrays .NET sont immutables).
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Piège du <code>+=</code> <code>$Array += "valeur"</code> paraît anodin mais <strong>recrée intégralement le tableau à chaque ajout</strong> (les arrays .NET sont immutables).
 À éviter dès qu'on traite plus de quelques dizaines d'éléments.</p>
-</blockquote>
+</div>
 <p>Alternatives :
 - Affecter directement une boucle : <code>$Result = foreach (...) { ... }</code>.
 - Utiliser une <code>[System.Collections.Generic.List[object]]::new()</code> puis <code>.Add(...)</code>.</p>

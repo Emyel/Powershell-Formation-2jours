@@ -1583,10 +1583,21 @@
 <td><code>-match</code></td>
 <td>Regex — <code>$_ -match "^A"</code></td>
 </tr>
+<tr>
+<td><code>-in</code></td>
+<td>Présence d'une valeur dans une liste — <code>"A" -in @("A","B","C")</code></td>
+</tr>
+<tr>
+<td><code>-notin</code></td>
+<td>Inverse de <code>-in</code></td>
+</tr>
 </tbody>
 </table>
 <p>Préfixer par <code>c</code> rend sensible à la casse : <code>-ceq</code>, <code>-clike</code>, ...
 Préfixer par <code>not</code> inverse : <code>-notlike</code>, <code>-notmatch</code>, ...</p>
+<p><code>$Admins = @("Prue","Piper","Phoebe")</code>
+<code>"Prue" -in $Admins      # → $true</code>
+<code>"Paige"  -notin $Admins   # → $true</code></p>
 <h2 id="comparaison-de-collections">Comparaison de collections</h2>
 <table>
 <thead>
