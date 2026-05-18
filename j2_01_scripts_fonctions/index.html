@@ -1441,8 +1441,10 @@
 <li>Un <strong>script</strong> (<code>.ps1</code>) est un enchaînement de commandes, structures et fonctions qui automatise un processus complexe.</li>
 <li>Une <strong>fonction</strong> est un morceau de code nommé, mono-tâche, réutilisable.</li>
 </ul>
-<p>!!! tip Règle d'or
-Si vous répétez <strong>au moins deux fois</strong> le même bloc de code pour une même opération, ce bloc doit devenir une fonction.</p>
+<div class="admonition tip">
+<p class="admonition-title">Règle d'or</p>
+<p>Si vous répétez <strong>au moins deux fois</strong> le même bloc de code pour une même opération, ce bloc doit devenir une fonction.</p>
+</div>
 <h2 id="parametres-dun-script">Paramètres d'un script</h2>
 <div class="highlight"><pre><span></span><code><span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
 <span class="k">param</span> <span class="p">(</span>
@@ -1463,6 +1465,7 @@ Si vous répétez <strong>au moins deux fois</strong> le même bloc de code pour
 <p>Le <strong>dot sourcing</strong> est notamment utile pour charger une bibliothèque de fonctions :</p>
 <div class="highlight"><pre><span></span><code><span class="p">.</span> <span class="s2">&quot;$PSScriptRoot\Functions.ps1&quot;</span>   <span class="c"># Toutes les fonctions deviennent disponibles</span>
 </code></pre></div>
+<p>∗<code>$PSScriptRoot</code> contient le dossier du script en cours d'exécution — indispensable pour les chemins relatifs fiables.*</p>
 <h2 id="execution-policy">Execution Policy</h2>
 <p>PowerShell protège l'exécution des scripts via une <strong>Execution Policy</strong>.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">Get-ExecutionPolicy</span> <span class="n">-List</span>
