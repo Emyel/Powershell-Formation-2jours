@@ -130,12 +130,11 @@ Certaines règles peuvent être auto-corrigées :
 Invoke-ScriptAnalyzer -Path .\MonScript.ps1 -Fix
 ```
 
-!!! tip 
-> Workflow recommandé
-> 1. Écrire le code.
-> 2. Lancer `Invoke-ScriptAnalyzer`.
-> 3. Corriger les warnings **avant** de committer.
-> 4. Intégrer PSScriptAnalyzer en CI/CD pour bloquer les PRs avec des violations.
+!!! tip "Workflow recommandé"
+    1. Écrire le code.
+    2. Lancer `Invoke-ScriptAnalyzer`.
+    3. Corriger les warnings **avant** de committer.
+    4. Intégrer PSScriptAnalyzer en CI/CD pour bloquer les PRs avec des violations.
 
 ### Personnaliser les règles
 

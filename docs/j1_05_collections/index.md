@@ -59,10 +59,9 @@ Ajouter une propriété après coup :
 $Computer | Add-Member -MemberType NoteProperty -Name RAM -Value "512Mo"
 ```
 
-!!! tip
-> Pourquoi PSCustomObject plutôt que Hashtable ?
-> - **Ordre garanti** des propriétés (contrairement à une hashtable classique).
-> - S'affiche en colonnes automatiquement dans la console.
-> - Compatible nativement avec `Export-Csv`, `ConvertTo-Json`, `Sort-Object`, etc.
->
-> C'est ce qu'on retournera systématiquement depuis nos fonctions en J2.
+!!! tip "Pourquoi PSCustomObject plutôt que Hashtable ?"
+    - **Ordre garanti** des propriétés (contrairement à une hashtable classique).
+    - S'affiche en colonnes automatiquement dans la console.
+    - Compatible nativement avec `Export-Csv`, `ConvertTo-Json`, `Sort-Object`, etc.
+
+    C'est ce qu'on retournera systématiquement depuis nos fonctions en J2.

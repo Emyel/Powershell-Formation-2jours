@@ -129,16 +129,14 @@ Ajouter :
 | 16:40 → 17:00 | 20 min | Pester en 5 minutes + Guidelines & PSScriptAnalyzer | `jour2/pester` + `jour2/guidelines` |
 | (optionnel) | | **TP final** : workshop Computer Info | `jour2/exercices` |
 
-!!! tip 
-> Si on a du temps en plus
-> - Pousser sur le **TP final** (workshop Computer Info) en J2 après-midi.
-> - Sinon, donner le TP en exercice "à la maison" avec correction en début de session suivante (si formation Niv.3 enchaînée).
+!!! tip "Si on a du temps en plus"
+    - Pousser sur le **TP final** (workshop Computer Info) en J2 après-midi.
+    - Sinon, donner le TP en exercice "à la maison" avec correction en début de session suivante (si formation Niv.3 enchaînée).
 
-!!! warning 
-> Si on a moins de temps
-> Les blocs à compresser en priorité :
-> - Opérateurs (donner en cheat-sheet).
-> - Compare-Object (rare en pratique).
-> - Foreach-Object **vs** mot-clé foreach (à traiter dans `structures` uniquement).
+!!! warning "Si on a moins de temps"
+    Les blocs à compresser en priorité :
+    - Opérateurs (donner en cheat-sheet).
+    - Compare-Object (rare en pratique).
+    - Foreach-Object **vs** mot-clé foreach (à traiter dans `structures` uniquement).
 
 Le bloc à **ne jamais sacrifier** : Try / Catch et PSCustomObject.

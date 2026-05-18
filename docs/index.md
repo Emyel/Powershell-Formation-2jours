@@ -34,8 +34,7 @@ Pas de prérequis fort : il faut savoir ouvrir une console et avoir une idée de
 - **TP final** en fin de J2 mobilisant tout ce qui a été vu.
 - Ratio cible : ~50% théorie, 50% pratique.
 
-!!! tip 
-> Environnement
-> - PowerShell 5.1 minimum, **7.x recommandé**.
-> - Éditeur : **VSCode** + extension PowerShell.
-> - Modules à installer dès l'ouverture : `PSScriptAnalyzer`.
+!!! tip "Environnement"
+    - PowerShell 5.1 minimum, **7.x recommandé**.
+    - Éditeur : **VSCode** + extension PowerShell.
+    - Modules à installer dès l'ouverture : `PSScriptAnalyzer`.

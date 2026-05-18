@@ -182,4 +182,6 @@ try {
 ```
 
 !!! tip "Pourquoi c'est important"
-    Ces canaux structurent la sortie de votre code. Un script de production émet du **Verbose** pour le suivi, des **Warning** pour signaler des anomalies non bloquantes, des **Error** pour les échecs, et retourne des **objets** dans le canal Success. Jamais de `Write-Host` en prod.
+    Ces canaux structurent la sortie de votre code. Un script de production émet du **Verbose** pour le suivi, des **Warning** pour signaler des anomalies non bloquantes, des **Error** pour les échecs, et retourne des **objets** dans le canal Success.
+    
+    Jamais de `Write-Host` en prod.

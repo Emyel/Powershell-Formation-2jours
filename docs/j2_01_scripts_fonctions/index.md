@@ -61,5 +61,5 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 powershell.exe -ExecutionPolicy Bypass -File "C:\chemin\monscript.ps1"
 ```
 
-!!! warning
-Configurer `Bypass` à l'échelle de la machine est une mauvaise pratique. Préférez `-Scope CurrentUser` ou utilisez `Bypass` uniquement en CLI/CI.
+!!! warning "La liberté ne doit pas peser sur la sécurité"
+    Configurer `Bypass` à l'échelle de la machine est une mauvaise pratique. Préférez `-Scope CurrentUser` ou utilisez `Bypass` uniquement en CLI/CI.

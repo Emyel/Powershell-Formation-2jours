@@ -123,8 +123,7 @@ Titre     Saison Episode
 Westworld 03     01
 ```
 
-!!! tip 
-> Quand utiliser quoi ?
-> - **Splatting** : dès qu'une commande a plus de 3-4 paramètres ou que les paramètres sont conditionnels.
-> - **Format Operator** : dès qu'on construit des chaînes avec des valeurs dynamiques — bien plus lisible que la concaténation.
-> - **Type Accelerators** : validation de format (IP, DateTime, Version), casting, regex nommées.
+!!! tip "Quand utiliser quoi ?"
+    - **Splatting** : dès qu'une commande a plus de 3-4 paramètres ou que les paramètres sont conditionnels.
+    - **Format Operator** : dès qu'on construit des chaînes avec des valeurs dynamiques — bien plus lisible que la concaténation.
+    - **Type Accelerators** : validation de format (IP, DateTime, Version), casting, regex nommées.
