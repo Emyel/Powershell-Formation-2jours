@@ -5,6 +5,10 @@
 Comme Bash ou CMD, il permet d'exécuter des commandes et d'automatiser des tâches système.
 
 Mais contrairement aux shells traditionnels qui manipulent principalement du **texte**, PowerShell manipule des **objets**.
+Et ces objets sont composés de **propriétés** et de **méthodes** et possède un **type**.
+
+![Voiture Objet](../zzz_assets/images/voiture_objet.png)
+
 
 C'est la différence fondamentale à comprendre.
 
@@ -27,13 +31,6 @@ PowerShell :
 ```powershell
 Get-Process
 ```
-
-Dans PowerShell, les résultats retournés possèdent :
-- des propriétés,
-- des méthodes,
-- un type.
-
-Cette approche rend le pipeline PowerShell extrêmement puissant.
 
 ---
 
