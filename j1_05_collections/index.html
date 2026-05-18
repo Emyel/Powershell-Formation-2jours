@@ -1490,15 +1490,14 @@ Piège du <code>+=</code> <code>$Array += "valeur"</code> paraît anodin mais <s
 <div class="highlight"><pre><span></span><code><span class="nv">$Computer</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-MemberType</span> <span class="n">NoteProperty</span> <span class="n">-Name</span> <span class="n">RAM</span> <span class="n">-Value</span> <span class="s2">&quot;512Mo&quot;</span>
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-</div>
-<blockquote>
-<p>Pourquoi PSCustomObject plutôt que Hashtable ?
-- <strong>Ordre garanti</strong> des propriétés (contrairement à une hashtable classique).
-- S'affiche en colonnes automatiquement dans la console.
-- Compatible nativement avec <code>Export-Csv</code>, <code>ConvertTo-Json</code>, <code>Sort-Object</code>, etc.</p>
+<p class="admonition-title">Pourquoi PSCustomObject plutôt que Hashtable ?</p>
+<ul>
+<li><strong>Ordre garanti</strong> des propriétés (contrairement à une hashtable classique).</li>
+<li>S'affiche en colonnes automatiquement dans la console.</li>
+<li>Compatible nativement avec <code>Export-Csv</code>, <code>ConvertTo-Json</code>, <code>Sort-Object</code>, etc.</li>
+</ul>
 <p>C'est ce qu'on retournera systématiquement depuis nos fonctions en J2.</p>
-</blockquote>
+</div>
 
 
 

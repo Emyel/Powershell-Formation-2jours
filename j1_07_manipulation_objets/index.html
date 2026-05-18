@@ -1533,14 +1533,13 @@ Alphonse
 <span class="p">}</span>
 </code></pre></div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title"><code>ForEach-Object</code> vs mot-clé <code>foreach</code></p>
+<ul>
+<li><code>ForEach-Object</code> (commande) : <strong>streame</strong> les objets du pipeline au fur et à mesure.</li>
+<li><code>foreach (...)</code> (structure, vue en J2) : charge tout en mémoire avant de boucler.
+PS7+ : <code>ForEach-Object -Parallel { ... }</code> permet le multi-threading.</li>
+</ul>
 </div>
-<blockquote>
-<p><code>ForEach-Object</code> vs mot-clé <code>foreach</code>
-- <code>ForEach-Object</code> (commande) : <strong>streame</strong> les objets du pipeline au fur et à mesure.
-- <code>foreach (...)</code> (structure, vue en J2) : charge tout en mémoire avant de boucler.
-PS7+ : <code>ForEach-Object -Parallel { ... }</code> permet le multi-threading.</p>
-</blockquote>
 <h2 id="compare-object-comparer">Compare-Object — <strong>comparer</strong></h2>
 <p>Compare deux collections et identifie les différences.</p>
 <div class="highlight"><pre><span></span><code><span class="nv">$before</span> <span class="p">=</span> <span class="nb">Get-Process</span>
