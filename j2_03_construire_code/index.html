@@ -806,6 +806,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#les-blocs-begin-process-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Les blocs begin / process / end
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fonction-ou-script" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1383,6 +1394,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#les-blocs-begin-process-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Les blocs begin / process / end
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fonction-ou-script" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1424,7 +1446,7 @@
 <li>contrôle d'erreur,</li>
 <li>formatage des données renvoyées.</li>
 </ul>
-<p><strong>Exemple</strong> : un script qui désactive des comptes AD va <em>orchestrer</em> plusieurs opérations (lire un CSV, appeler une fonction de désactivation, journaliser). 
+<p><strong>Exemple</strong> : un script qui désactive des comptes AD va <em>orchestrer</em> plusieurs opérations (lire un CSV, appeler une fonction de désactivation, journaliser).
 La désactivation elle-même est une fonction réutilisable.</p>
 <h2 id="le-squelette-en-3-piliers">Le squelette en 3 piliers</h2>
 <p><strong>Inputs</strong> — paramètres validés, typés, nommés.
@@ -1453,6 +1475,80 @@ La désactivation elle-même est une fonction réutilisable.</p>
 <p>Ce squelette est volontairement simplifié. Dans les pages suivantes,
 on va l'enrichir avec les blocs <code>begin</code>/<code>process</code>/<code>end</code>,
 <code>ValueFromPipeline</code>, <code>Try/Catch</code> et les canaux <code>Verbose</code>/<code>Warning</code>.</p>
+</div>
+<h2 id="les-blocs-begin-process-end">Les blocs <code>begin</code> / <code>process</code> / <code>end</code></h2>
+<p>Ces trois blocs structurent l'exécution d'une fonction qui reçoit des objets <strong>depuis le pipeline</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Bloc</th>
+<th>Quand s'exécute-t-il ?</th>
+<th>Usage typique</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>begin</code></td>
+<td>Une seule fois, avant le premier objet</td>
+<td>Initialisation, connexion, log de démarrage</td>
+</tr>
+<tr>
+<td><code>process</code></td>
+<td>Une fois <strong>par objet</strong> reçu du pipeline</td>
+<td>Le cœur du traitement — là où la logique vit</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>Une seule fois, après le dernier objet</td>
+<td>Nettoyage, déconnexion, log de fin</td>
+</tr>
+</tbody>
+</table>
+<p>Sans ces blocs, le corps de la fonction s'exécute une seule fois avec <strong>tous</strong> les objets d'un coup — ce qui casse le streaming pipeline.</p>
+<div class="highlight"><pre><span></span><code><span class="k">function</span> <span class="nb">Get-OSVersion</span> <span class="p">{</span>
+    <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
+    <span class="k">param</span> <span class="p">(</span>
+        <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">,</span> <span class="k">ValueFromPipelineByPropertyName</span><span class="p">)]</span>
+        <span class="p">[</span><span class="k">Alias</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">)]</span>
+        <span class="no">[string]</span><span class="nv">$ComputerName</span>
+    <span class="p">)</span>
+
+    <span class="k">begin</span> <span class="p">{</span>
+        <span class="nb">Write-Verbose</span> <span class="s2">&quot;Démarrage de Get-OSVersion&quot;</span>
+    <span class="p">}</span>
+
+    <span class="k">process</span> <span class="p">{</span>
+        <span class="c"># Ce bloc s&#39;exécute une fois par machine reçue du pipeline</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nv">$OS</span> <span class="p">=</span> <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$ComputerName</span> <span class="n">-ClassName</span> <span class="n">Win32_OperatingSystem</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
+
+            <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+                <span class="n">ComputerName</span> <span class="p">=</span> <span class="nv">$ComputerName</span>
+                <span class="n">OSVersion</span>    <span class="p">=</span> <span class="nv">$OS</span><span class="p">.</span><span class="n">Caption</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">catch</span> <span class="p">{</span>
+            <span class="nb">Write-Warning</span> <span class="s2">&quot;Échec pour $ComputerName : </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="n">Message</span><span class="p">)</span><span class="s2">&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">end</span> <span class="p">{</span>
+        <span class="nb">Write-Verbose</span> <span class="s2">&quot;Fin de Get-OSVersion&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c"># Appel direct</span>
+<span class="nb">Get-OSVersion</span> <span class="n">-ComputerName</span> <span class="n">SRV01</span>
+
+<span class="c"># Appel depuis le pipeline — process s&#39;exécute une fois par machine</span>
+<span class="s2">&quot;SRV01&quot;</span><span class="p">,</span> <span class="s2">&quot;SRV02&quot;</span><span class="p">,</span> <span class="s2">&quot;SRV03&quot;</span> <span class="p">|</span> <span class="nb">Get-OSVersion</span> <span class="n">-Verbose</span>
+
+<span class="c"># Compatible avec Get-ADComputer grâce à l&#39;alias &#39;Name&#39;</span>
+<span class="nb">Get-ADComputer</span> <span class="n">-Filter</span> <span class="p">*</span> <span class="p">|</span> <span class="nb">Get-OSVersion</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Règle pratique</p>
+<p>Dès qu'une fonction a <code>ValueFromPipeline</code> ou <code>ValueFromPipelineByPropertyName</code> sur un paramètre, elle doit avoir un bloc <code>process</code>. Sinon, seul le <strong>dernier</strong> objet du pipeline sera traité.</p>
 </div>
 <h2 id="fonction-ou-script">Fonction ou script ?</h2>
 <p><strong>Fonction</strong>

@@ -505,6 +505,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#null-pieges-de-comparaison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        $null — pièges de comparaison
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#variables-denvironnement" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1449,6 +1460,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#null-pieges-de-comparaison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        $null — pièges de comparaison
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#variables-denvironnement" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1557,6 +1579,36 @@
 </tr>
 </tbody>
 </table>
+<h2 id="null-pieges-de-comparaison"><code>$null</code> — pièges de comparaison</h2>
+<p><code>$null</code> est une valeur spéciale qui représente l'absence de valeur. Elle se comporte de manière surprenante dans certains cas.</p>
+<p><strong>Piège 1 — ordre des opérandes</strong></p>
+<p>Quand le membre gauche d'une comparaison est une collection, PowerShell filtre la collection plutôt que de renvoyer un booléen :</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$Resultats</span> <span class="p">=</span> <span class="nb">Get-ADUser</span> <span class="n">-Filter</span> <span class="p">{</span> <span class="n">Department</span> <span class="o">-eq</span> <span class="s2">&quot;IT&quot;</span> <span class="p">}</span>   <span class="c"># peut renvoyer $null si aucun résultat</span>
+
+<span class="c"># ❌ À éviter : si $Resultats est une collection, PowerShell filtre et renvoie [] au lieu de $false</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$Resultats</span> <span class="o">-eq</span> <span class="nv">$null</span><span class="p">)</span> <span class="p">{</span> <span class="s2">&quot;Aucun résultat&quot;</span> <span class="p">}</span>
+
+<span class="c"># ✅ À privilégier : $null à gauche force une vraie comparaison booléenne</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$null</span> <span class="o">-eq</span> <span class="nv">$Resultats</span><span class="p">)</span> <span class="p">{</span> <span class="s2">&quot;Aucun résultat&quot;</span> <span class="p">}</span>
+</code></pre></div>
+<p>La règle est simple : <strong><code>$null</code> toujours à gauche</strong> dans une comparaison d'égalité.</p>
+<p><strong>Piège 2 — variable non initialisée</strong></p>
+<p>Une variable non déclarée vaut <code>$null</code> — pas d'erreur, juste un comportement silencieux :</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="nv">$null</span> <span class="o">-eq</span> <span class="nv">$MaVariable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s2">&quot;Variable non initialisée ou explicitement nulle&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Piège 3 — <code>$null</code> dans une collection</strong></p>
+<p><code>$null</code> peut se retrouver dans un tableau sans que ce soit évident :</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$Liste</span> <span class="p">=</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="nv">$null</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span>
+<span class="nv">$Liste</span><span class="p">.</span><span class="n">Count</span>        <span class="c"># → 3</span>
+<span class="nv">$Liste</span> <span class="o">-ne</span> <span class="nv">$null</span>    <span class="c"># → @(&quot;A&quot;, &quot;B&quot;)  (filtre les nulls)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Bonne pratique</p>
+<p>Toujours mettre <code>$null</code> à gauche de l'opérateur de comparaison.
+PSScriptAnalyzer signale automatiquement les violations de cette règle (<code>PSPossibleIncorrectComparisonWithNull</code>).</p>
+</div>
 <h2 id="variables-denvironnement">Variables d'environnement</h2>
 <p>Le drive virtuel <code>Env:</code> expose les variables d'environnement Windows.</p>
 <div class="highlight"><pre><span></span><code><span class="nv">$env:USERNAME</span>       <span class="c"># Utilisateur courant</span>

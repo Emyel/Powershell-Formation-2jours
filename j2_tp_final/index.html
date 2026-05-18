@@ -1682,10 +1682,9 @@
 <div class="highlight"><pre><span></span><code><span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="p">&lt;</span><span class="n">name</span><span class="p">&gt;</span> <span class="n">-ClassName</span> <span class="n">Win32_Processor</span>
 </code></pre></div>
 <h3 id="recuperer-lespace-disque-c">Récupérer l'espace disque C:</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">$Session</span> <span class="p">=</span> <span class="nb">New-CimSession</span> <span class="n">-ComputerName</span> <span class="p">&lt;</span><span class="n">name</span><span class="p">&gt;</span>
-<span class="nb">Get-Volume</span> <span class="n">-CimSession</span> <span class="nv">$Session</span> <span class="n">-DriveLetter</span> <span class="n">C</span>
-<span class="nb">Remove-CimSession</span> <span class="nv">$Session</span>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="p">&lt;</span><span class="n">name</span><span class="p">&gt;</span> <span class="n">-ClassName</span> <span class="n">Win32_LogicalDisk</span> <span class="n">-Filter</span> <span class="s2">&quot;DeviceID=&#39;C:&#39;&quot;</span>
 </code></pre></div>
+<p>Les propriétés utiles sont <code>FreeSpace</code> (octets) et <code>Size</code> (octets).</p>
 <h2 id="bonus-1-optionnel">Bonus 1 (optionnel)</h2>
 <ul>
 <li>Ajouter un paramètre <code>[switch]$IncludeDisk</code> qui inclut ou non les infos disque</li>
@@ -1861,19 +1860,16 @@ Mot de passe   : ChangeMe2024!
             <span class="nb">Write-Verbose</span> <span class="s2">&quot;Interrogation de $Computer&quot;</span>
 
             <span class="k">try</span> <span class="p">{</span>
-                <span class="nv">$OS</span>  <span class="p">=</span> <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$Computer</span> <span class="n">-ClassName</span> <span class="n">Win32_OperatingSystem</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
-                <span class="nv">$CPU</span> <span class="p">=</span> <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$Computer</span> <span class="n">-ClassName</span> <span class="n">Win32_Processor</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
-
-                <span class="nv">$Session</span> <span class="p">=</span> <span class="nb">New-CimSession</span> <span class="n">-ComputerName</span> <span class="nv">$Computer</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
-                <span class="nv">$Volume</span>  <span class="p">=</span> <span class="nb">Get-Volume</span> <span class="n">-CimSession</span> <span class="nv">$Session</span> <span class="n">-DriveLetter</span> <span class="n">C</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
-                <span class="nb">Remove-CimSession</span> <span class="nv">$Session</span>
+                <span class="nv">$OS</span>   <span class="p">=</span> <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$Computer</span> <span class="n">-ClassName</span> <span class="n">Win32_OperatingSystem</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
+                <span class="nv">$CPU</span>  <span class="p">=</span> <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$Computer</span> <span class="n">-ClassName</span> <span class="n">Win32_Processor</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
+                <span class="nv">$Disk</span> <span class="p">=</span> <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$Computer</span> <span class="n">-ClassName</span> <span class="n">Win32_LogicalDisk</span> <span class="n">-Filter</span> <span class="s2">&quot;DeviceID=&#39;C:&#39;&quot;</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
 
                 <span class="no">[PSCustomObject]</span><span class="p">@{</span>
                     <span class="n">ComputerName</span> <span class="p">=</span> <span class="nv">$OS</span><span class="p">.</span><span class="n">CSName</span>
                     <span class="n">OSVersion</span>    <span class="p">=</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="nv">$OS</span><span class="p">.</span><span class="n">Caption</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$OS</span><span class="p">.</span><span class="n">Version</span><span class="p">)</span><span class="s2">&quot;</span>
                     <span class="n">CPUCores</span>     <span class="p">=</span> <span class="nv">$CPU</span><span class="p">.</span><span class="n">NumberOfCores</span>
                     <span class="n">RAMTotalGB</span>   <span class="p">=</span> <span class="no">[math]</span><span class="p">::</span><span class="n">Round</span><span class="p">(</span><span class="nv">$OS</span><span class="p">.</span><span class="n">TotalVisibleMemorySize</span> <span class="p">/</span> <span class="n">1MB</span><span class="p">,</span> <span class="n">2</span><span class="p">)</span>
-                    <span class="n">DiskFreeGB</span>   <span class="p">=</span> <span class="no">[math]</span><span class="p">::</span><span class="n">Round</span><span class="p">(</span><span class="nv">$Volume</span><span class="p">.</span><span class="n">SizeRemaining</span> <span class="p">/</span> <span class="n">1GB</span><span class="p">,</span> <span class="n">2</span><span class="p">)</span>
+                    <span class="n">DiskFreeGB</span>   <span class="p">=</span> <span class="no">[math]</span><span class="p">::</span><span class="n">Round</span><span class="p">(</span><span class="nv">$Disk</span><span class="p">.</span><span class="n">FreeSpace</span> <span class="p">/</span> <span class="n">1GB</span><span class="p">,</span> <span class="n">2</span><span class="p">)</span>
                 <span class="p">}</span>
             <span class="p">}</span>
             <span class="k">catch</span> <span class="p">{</span>

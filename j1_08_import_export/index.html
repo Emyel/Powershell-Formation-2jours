@@ -1437,7 +1437,7 @@
 
 <h1 id="exportation-importation">Exportation / Importation</h1>
 <h2 id="fichier-brut">Fichier brut</h2>
-<div class="highlight"><pre><span></span><code><span class="nb">Get-EventLog</span> <span class="n">-LogName</span> <span class="n">Application</span> <span class="n">-Newest</span> <span class="n">10</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">Log</span><span class="p">.</span><span class="n">txt</span>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-WinEvent</span> <span class="n">-LogName</span> <span class="n">Application</span> <span class="n">-Newest</span> <span class="n">10</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">Log</span><span class="p">.</span><span class="n">txt</span> <span class="n">-Encoding</span> <span class="n">utf8NoBOM</span>
 <span class="nb">Get-Content</span> <span class="n">C</span><span class="p">:\</span><span class="n">Windows</span><span class="p">\</span><span class="n">System32</span><span class="p">\</span><span class="n">drivers</span><span class="p">\</span><span class="n">etc</span><span class="p">\</span><span class="n">hosts</span>
 </code></pre></div>
 <h2 id="csv">CSV</h2>
@@ -1448,8 +1448,22 @@
 <li><code>-Delimiter</code> : caractère de séparation (<code>,</code> par défaut, souvent <code>;</code> en France).</li>
 <li><code>-NoTypeInformation</code> : retire l'en-tête <code>#TYPE</code> qui n'est plus utile depuis PS6.</li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Encodage et accents</p>
+<p>Par défaut, <code>Export-Csv</code> produit de l'UTF-8 sans BOM en PS 6+, mais de l'Unicode (UTF-16) en PS 5.1.
+Résultat : les accents s'affichent en caractères parasites à l'ouverture dans Excel.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># PS 5.1 — forcer UTF-8 avec BOM (lisible par Excel sans configuration)</span>
+<span class="nb">Get-Process</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="p">.\</span><span class="n">Processes</span><span class="p">.</span><span class="n">csv</span> <span class="n">-NoTypeInformation</span> <span class="n">-Encoding</span> <span class="n">UTF8</span>
+
+<span class="c"># PS 7 — si Excel râle sur les accents</span>
+<span class="nb">Get-Process</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="p">.\</span><span class="n">Processes</span><span class="p">.</span><span class="n">csv</span> <span class="n">-NoTypeInformation</span> <span class="n">-Encoding</span> <span class="n">utf8BOM</span>
+
+<span class="c"># En France, combiner délimiteur et encodage</span>
+<span class="nb">Get-Process</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="p">.\</span><span class="n">Processes</span><span class="p">.</span><span class="n">csv</span> <span class="n">-NoTypeInformation</span> <span class="n">-Delimiter</span> <span class="s2">&quot;;&quot;</span> <span class="n">-Encoding</span> <span class="n">utf8BOM</span>
+</code></pre></div>
+</div>
 <h2 id="json">JSON</h2>
-<div class="highlight"><pre><span></span><code><span class="nb">Get-Service</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">services</span><span class="p">.</span><span class="n">json</span>
+<div class="highlight"><pre><span></span><code><span class="nb">Get-Service</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">services</span><span class="p">.</span><span class="n">json</span> <span class="n">-Encoding</span> <span class="n">utf8NoBOM</span>
 <span class="nb">Get-Content</span> <span class="n">services</span><span class="p">.</span><span class="n">json</span> <span class="n">-Raw</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
 </code></pre></div>
 <p><code>ConvertFrom-Json</code> ne prend pas de fichier en entrée mais une <strong>string</strong>. Le <code>-Raw</code> de <code>Get-Content</code> lit tout le fichier d'un coup au lieu de le splitter ligne par ligne.</p>
@@ -1474,6 +1488,41 @@
 <p class="admonition-title">Le fichier ne sera <strong>déchiffrable que par le même utilisateur sur la même machine</strong></p>
 <p>C'est très bien pour un compte de service sur une machine, c'est inutilisable pour partager des creds entre deux postes.</p>
 <p>Pour des cas plus avancés (équipe, multi-machines), regarder les modules <code>Microsoft.PowerShell.SecretManagement</code> et <code>Microsoft.PowerShell.SecretStore</code>.</p>
+</div>
+<hr />
+<div class="admonition note">
+<p class="admonition-title">Récapitulatif encodages courants</p>
+<table>
+<thead>
+<tr>
+<th>Valeur</th>
+<th>PS</th>
+<th>Quand l'utiliser</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UTF8</code></td>
+<td>5.1</td>
+<td>UTF-8 avec BOM — compatible Excel</td>
+</tr>
+<tr>
+<td><code>utf8BOM</code></td>
+<td>7</td>
+<td>UTF-8 avec BOM — compatible Excel</td>
+</tr>
+<tr>
+<td><code>utf8NoBOM</code></td>
+<td>7</td>
+<td>UTF-8 sans BOM — scripts, API, échanges Linux</td>
+</tr>
+<tr>
+<td><code>Default</code></td>
+<td>5.1/7</td>
+<td>Encodage ANSI système — à éviter en production</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
