@@ -115,70 +115,14 @@ function Get-ComputerStatus {
 
 Dans **VSCode** : `Shift+Alt+F` ou clic droit > "Mettre le document en forme".
 
-## PSScriptAnalyzer — le linter officiel
-
-[PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer) est un **linter** : il analyse votre code et détecte les violations de bonnes pratiques.
-
-### Installation
-
-```powershell
-Install-Module PSScriptAnalyzer -Scope CurrentUser
-```
-
-### Utilisation
-
-```powershell
-Invoke-ScriptAnalyzer -Path .\MonScript.ps1
-Invoke-ScriptAnalyzer -Path .\MonDossier -Recurse
-```
-
-Exemple de résultat :
-
-```text
-RuleName                            Severity     ScriptName Line  Message
---------                            --------     ---------- ----  -------
-PSAvoidUsingWriteHost               Warning      script.ps1   42  Avoid using Write-Host because it might not work in all hosts...
-PSUseSingularNouns                  Warning      script.ps1   15  The cmdlet 'Get-Servers' uses a plural noun. A singular noun should be used instead.
-PSAvoidUsingPositionalParameters    Warning      script.ps1   23  Avoid using positional parameters when calling a command.
-```
-
-### Intégration VSCode
-
-L'extension **PowerShell** pour VSCode inclut PSScriptAnalyzer. Les warnings apparaissent en direct dans l'éditeur (soulignés en vert/jaune).
-
-### Corriger automatiquement
-
-Certaines règles peuvent être auto-corrigées :
-
-```powershell
-Invoke-ScriptAnalyzer -Path .\MonScript.ps1 -Fix
-```
-
-!!! tip "Workflow recommandé"
-    1. Écrire le code.
-    2. Lancer `Invoke-ScriptAnalyzer`.
-    3. Corriger les warnings **avant** de committer.
-    4. Intégrer PSScriptAnalyzer en CI/CD pour bloquer les PRs avec des violations.
-
-### Personnaliser les règles
-
-Créer un fichier `PSScriptAnalyzerSettings.psd1` :
-
-```powershell
-@{
-    ExcludeRules = @('PSAvoidUsingWriteHost')   # Désactiver une règle
-    Severity     = @('Error','Warning')         # Ignorer les Info
-}
-```
-
-```powershell
-Invoke-ScriptAnalyzer -Path . -Settings .\PSScriptAnalyzerSettings.psd1
-```
+!!! tip "Le linter intégré à VSCode"
+    L'extension **PowerShell** pour VSCode inclut un linter qui analyse votre code en temps réel et souligne les violations de bonnes pratiques directement dans l'éditeur (alias, paramètres positionnels, nommage, etc.).
+    Pas besoin d'action supplémentaire : dès que vous installez l'extension, il est actif.
 
 ## En résumé
 
 - Alias / param positionnels → **jamais dans un script**.
 - Nommage : `Verb-Noun`, PascalCase, singulier.
-- Indentation : VSCode le fait pour vous.
+- Indentation : VSCode le fait pour vous (`Shift+Alt+F`).
 - `Write-Host` → interdit dans les fonctions réutilisables, acceptable dans les scripts interactifs.
-- **PSScriptAnalyzer** : activé dès le début, corrigé avant commit.
+- VSCode souligne les violations en temps réel — corrigez avant de committer.

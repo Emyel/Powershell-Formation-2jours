@@ -1,4 +1,3 @@
-
 # Modules PowerShell
 
 Un **module** est une bibliothèque de commandes (fonctions, cmdlets) dédiée à la gestion d'un élément précis : application, API, rôle Windows Server, service cloud, etc.
@@ -51,7 +50,6 @@ Repository public officiel Microsoft. Attention : certains modules sont communau
 | `ExchangeOnlineManagement` | Gestion Exchange Online. |
 | `Az` | Gestion Azure (compute, storage, networking, etc.). |
 | `Pester` | Tests unitaires. |
-| `PSScriptAnalyzer` | Linter PowerShell. |
 | `ImportExcel` | Manipulation Excel sans avoir Excel installé. |
 | `PnP.PowerShell` | Administration SharePoint Online. |
 

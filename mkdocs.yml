@@ -1,6 +1,7 @@
 site_name: Formation Powershell 2 jours
 site_author: Mathieu Lanoë
 repo_url: https://github.com/Emyel/Powershell-Formation-2jours
+site_url: https://emyel.github.io/Powershell-Formation-2jours/
 
 theme:
   name: material

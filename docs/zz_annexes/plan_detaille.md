@@ -1,4 +1,3 @@
-
 # Plan détaillé — heure par heure
 
 Document à usage du **formateur**. Le timing est indicatif et doit être adapté au public.
@@ -59,7 +58,7 @@ Document à usage du **formateur**. Le timing est indicatif et doit être adapt�
 | 15:20 → 15:30 | 10 min | **Pause** | |
 | 15:30 → 15:50 | 20 min | SupportsShouldProcess : WhatIf / Confirm | `jour2/shouldprocess` |
 | 15:50 → 16:05 | 15 min | Comment-Based Help | `jour2/help` |
-| 16:05 → 16:20 | 15 min | Guidelines & PSScriptAnalyzer | `jour2/guidelines` |
+| 16:05 → 16:20 | 15 min | Guidelines & bonnes pratiques VSCode | `jour2/guidelines` |
 | 16:20 → 16:50 | 30 min | **🎯 TP Final — Get-ComputerInfo** | `jour2/tp_final` |
 | 16:50 → 17:00 | 10 min | Correction TP final, conclusion, questions | |
 
@@ -84,7 +83,7 @@ Document à usage du **formateur**. Le timing est indicatif et doit être adapt�
 
 **25 min récupérées** → utilisées pour :
 - Renforcer ShouldProcess (+5 min, passé de 15 à 20 min)
-- Renforcer Guidelines/PSScriptAnalyzer (+5 min, passé de 10 à 15 min)
+- Renforcer Guidelines (+5 min, passé de 10 à 15 min)
 - Marge de sécurité (+15 min répartis sur J2)
 
 ### 📊 Répartition pédagogique
@@ -126,7 +125,7 @@ Ajouter :
 | 15:15 → 16:00 | 45 min | Splatting + Format Operator + Type Accelerators | `jour2/beautify` |
 | 16:00 → 16:20 | 20 min | `SupportsShouldProcess` (`-WhatIf` / `-Confirm`) | `jour2/shouldprocess` |
 | 16:20 → 16:40 | 20 min | Comment-Based Help | `jour2/help` |
-| 16:40 → 17:00 | 20 min | Pester en 5 minutes + Guidelines & PSScriptAnalyzer | `jour2/pester` + `jour2/guidelines` |
+| 16:40 → 17:00 | 20 min | Pester en 5 minutes + Guidelines & bonnes pratiques | `jour2/pester` + `jour2/guidelines` |
 | (optionnel) | | **TP final** : workshop Computer Info | `jour2/exercices` |
 
 !!! tip "Si on a du temps en plus"

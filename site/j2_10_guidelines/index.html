@@ -1081,10 +1081,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#eviter-write-host" class="md-nav__link">
+  <a href="#write-host-quand-lutiliser-quand-leviter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Éviter Write-Host
+        Write-Host — quand l'utiliser, quand l'éviter
       
     </span>
   </a>
@@ -1539,10 +1539,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#eviter-write-host" class="md-nav__link">
+  <a href="#write-host-quand-lutiliser-quand-leviter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Éviter Write-Host
+        Write-Host — quand l'utiliser, quand l'éviter
       
     </span>
   </a>
@@ -1696,14 +1696,39 @@
 <p>Verbes approuvés (<code>Get-Verb</code>), au singulier, + nom au singulier.</p>
 <p>❌ <code>Create-Password</code> (verbe non approuvé)
 ✅ <code>New-Password</code></p>
-<h3 id="eviter-write-host">Éviter <code>Write-Host</code></h3>
-<p>Préférez :</p>
+<h3 id="write-host-quand-lutiliser-quand-leviter"><code>Write-Host</code> — quand l'utiliser, quand l'éviter</h3>
+<p><code>Write-Host</code> écrit directement dans la console et <strong>casse le pipeline</strong> : sa sortie ne peut pas être capturée, redirigée ou traitée par la commande suivante.</p>
+<p>Dans une <strong>fonction réutilisable</strong>, préférez toujours :</p>
 <ul>
-<li><code>Write-Output</code> (ou laisser tomber l'objet dans le pipeline) pour les données.</li>
-<li><code>Write-Verbose</code> pour les messages de progression / debug.</li>
+<li><code>Write-Output</code> (ou laisser l'objet tomber dans le pipeline) pour les données.</li>
+<li><code>Write-Verbose</code> pour les messages de progression.</li>
+<li><code>Write-Warning</code> pour les anomalies non bloquantes.</li>
 <li><code>Write-Information</code> pour les messages informatifs filtrables.</li>
 </ul>
-<p><code>Write-Host</code> écrit <strong>directement dans la console</strong> et casse le pipeline. Historiquement, c'était la seule façon d'afficher du texte coloré, mais <code>Write-Information</code> + <code>Write-Host</code> coloré ne doivent être utilisés que pour des scripts interactifs, jamais dans des fonctions réutilisables.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># ❌ Casse le pipeline — $result sera vide</span>
+<span class="nv">$Result</span> <span class="p">=</span> <span class="nb">Get-ComputerInfo</span> <span class="n">-ComputerName</span> <span class="n">SRV01</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">OSVersion</span> <span class="o">-like</span> <span class="s2">&quot;*2022*&quot;</span> <span class="p">}</span>
+<span class="c"># (si Get-ComputerInfo utilise Write-Host au lieu de retourner un objet)</span>
+
+<span class="c"># ✅ L&#39;objet circule dans le pipeline</span>
+<span class="k">function</span> <span class="nb">Get-ComputerInfo</span> <span class="p">{</span>
+    <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
+    <span class="k">param</span> <span class="p">(</span><span class="no">[string]</span><span class="nv">$ComputerName</span><span class="p">)</span>
+
+    <span class="nb">Write-Verbose</span> <span class="s2">&quot;Interrogation de $ComputerName&quot;</span>   <span class="c"># progression</span>
+    <span class="no">[PSCustomObject]</span><span class="p">@{</span> <span class="n">ComputerName</span> <span class="p">=</span> <span class="nv">$ComputerName</span><span class="p">;</span> <span class="n">OSVersion</span> <span class="p">=</span> <span class="s2">&quot;...&quot;</span> <span class="p">}</span>   <span class="c"># donnée</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Les cas légitimes de <code>Write-Host</code></strong> existent néanmoins :</p>
+<ul>
+<li><strong>Scripts interactifs</strong> destinés à être lus par un humain en direct (menus, assistants pas-à-pas), où le pipeline n'est pas utilisé.</li>
+<li><strong>Affichage coloré</strong> dans un script de démo ou d'onboarding (<code>-ForegroundColor Green</code>).</li>
+<li><strong>Environnements contraints</strong> comme Azure Automation Runbooks ou certains outils de CI/CD qui n'exposent que la sortie console — dans ces cas, <code>Write-Host</code> est parfois le seul moyen d'émettre un message visible.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">La règle simple</p>
+<p>Bibliothèque de fonctions, module, code réutilisable → <strong>jamais de <code>Write-Host</code></strong>.
+Script one-shot interactif, démo, outil de diagnostic → <code>Write-Host</code> est acceptable avec modération.</p>
+</div>
 <h3 id="variables-en-pascalcase">Variables en PascalCase</h3>
 <div class="highlight"><pre><span></span><code><span class="nv">$MaVariable</span> <span class="p">=</span> <span class="s2">&quot;valeur&quot;</span>
 <span class="nv">$ListeDeServeurs</span> <span class="p">=</span> <span class="p">@()</span>
@@ -1785,6 +1810,7 @@ PSAvoidUsingPositionalParameters    Warning      script.ps1   23  Avoid using po
 <li>Alias / param positionnels → <strong>jamais dans un script</strong>.</li>
 <li>Nommage : <code>Verb-Noun</code>, PascalCase, singulier.</li>
 <li>Indentation : VSCode le fait pour vous.</li>
+<li><code>Write-Host</code> → interdit dans les fonctions réutilisables, acceptable dans les scripts interactifs.</li>
 <li><strong>PSScriptAnalyzer</strong> : activé dès le début, corrigé avant commit.</li>
 </ul>
 
