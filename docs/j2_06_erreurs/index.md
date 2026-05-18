@@ -27,6 +27,25 @@ L'erreur arrête immédiatement l'exécution.
 !!! danger "Erreur fréquente"
     Mettre `$ErrorActionPreference = "SilentlyContinue"` en tête de script pour "éviter les erreurs" est une **anti-pattern**. On masque les vrais problèmes au lieu de les gérer.
 
+!!! tip "Bonne pratique — que mettre globalement ?"
+    Laisser `$ErrorActionPreference` à sa valeur par défaut (`Continue`) et gérer `-ErrorAction Stop` **au cas par cas** sur les commandes critiques, à l'intérieur d'un `Try/Catch`.
+
+    ```powershell
+    # ❌ À éviter — transforme toutes les erreurs en exceptions,
+    #    y compris celles que vous ne voulez pas intercepter
+    $ErrorActionPreference = 'Stop'
+
+    # ✅ Recommandé — cibler uniquement les commandes critiques
+    try {
+        Get-CimInstance -ComputerName $Computer -ClassName Win32_OperatingSystem -ErrorAction Stop
+    }
+    catch {
+        Write-Warning "Échec pour $Computer : $($_.Exception.Message)"
+    }
+    ```
+
+    Exception légitime : un script court et entièrement encadré dans un `try/catch` global peut utiliser `$ErrorActionPreference = 'Stop'` pour simplifier le code — à condition que le `catch` soit présent et utile.
+
 ## Try / Catch — principe
 
 Pour gérer les erreurs **Terminating**, on les encadre dans un bloc `Try / Catch`.
@@ -37,7 +56,7 @@ $ComputerList = "OfflineComputer","WKS02"
 foreach ($Computer in $ComputerList) {
     try {
         $OS = Get-CimInstance -ComputerName $Computer -ClassName Win32_OperatingSystem -ErrorAction Stop
-        Write-Host "✅ $Computer : $($OS.Caption)"
+        Write-Verbose "✅ $Computer : $($OS.Caption)"
     }
     catch {
         Write-Warning "❌ Échec pour $Computer : $($_.Exception.Message)"
@@ -148,13 +167,13 @@ function Invoke-Robocopy {
     )
 
     Write-Verbose "Copie de $Source vers $Destination"
-    
+
     robocopy $Source $Destination /MIR /R:3 /W:5 /NP
-    
+
     if ($LASTEXITCODE -ge 8) {
         throw "Robocopy a échoué (code $LASTEXITCODE)"
     }
-    
+
     Write-Verbose "Copie terminée (code $LASTEXITCODE)"
 }
 ```

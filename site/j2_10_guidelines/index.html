@@ -10,6 +10,8 @@
         <meta name="author" content="Mathieu Lanoë">
       
       
+        <link rel="canonical" href="https://emyel.github.io/Powershell-Formation-2jours/j2_10_guidelines/">
+      
       
         <link rel="prev" href="../j2_09_help/">
       
@@ -1119,78 +1121,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#psscriptanalyzer-le-linter-officiel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PSScriptAnalyzer — le linter officiel
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="PSScriptAnalyzer — le linter officiel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#utilisation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Utilisation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#integration-vscode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Intégration VSCode
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#corriger-automatiquement" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Corriger automatiquement
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#personnaliser-les-regles" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Personnaliser les règles
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#en-resume" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1577,78 +1507,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#psscriptanalyzer-le-linter-officiel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PSScriptAnalyzer — le linter officiel
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="PSScriptAnalyzer — le linter officiel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#utilisation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Utilisation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#integration-vscode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Intégration VSCode
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#corriger-automatiquement" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Corriger automatiquement
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#personnaliser-les-regles" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Personnaliser les règles
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#en-resume" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1765,53 +1623,18 @@ Script one-shot interactif, démo, outil de diagnostic → <code>Write-Host</cod
 <span class="p">}</span>
 </code></pre></div>
 <p>Dans <strong>VSCode</strong> : <code>Shift+Alt+F</code> ou clic droit &gt; "Mettre le document en forme".</p>
-<h2 id="psscriptanalyzer-le-linter-officiel">PSScriptAnalyzer — le linter officiel</h2>
-<p><a href="https://github.com/PowerShell/PSScriptAnalyzer">PSScriptAnalyzer</a> est un <strong>linter</strong> : il analyse votre code et détecte les violations de bonnes pratiques.</p>
-<h3 id="installation">Installation</h3>
-<div class="highlight"><pre><span></span><code><span class="nb">Install-Module</span> <span class="n">PSScriptAnalyzer</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</code></pre></div>
-<h3 id="utilisation">Utilisation</h3>
-<div class="highlight"><pre><span></span><code><span class="nb">Invoke-ScriptAnalyzer</span> <span class="n">-Path</span> <span class="p">.\</span><span class="n">MonScript</span><span class="p">.</span><span class="n">ps1</span>
-<span class="nb">Invoke-ScriptAnalyzer</span> <span class="n">-Path</span> <span class="p">.\</span><span class="n">MonDossier</span> <span class="n">-Recurse</span>
-</code></pre></div>
-<p>Exemple de résultat :</p>
-<div class="highlight"><pre><span></span><code>RuleName                            Severity     ScriptName Line  Message
---------                            --------     ---------- ----  -------
-PSAvoidUsingWriteHost               Warning      script.ps1   42  Avoid using Write-Host because it might not work in all hosts...
-PSUseSingularNouns                  Warning      script.ps1   15  The cmdlet &#39;Get-Servers&#39; uses a plural noun. A singular noun should be used instead.
-PSAvoidUsingPositionalParameters    Warning      script.ps1   23  Avoid using positional parameters when calling a command.
-</code></pre></div>
-<h3 id="integration-vscode">Intégration VSCode</h3>
-<p>L'extension <strong>PowerShell</strong> pour VSCode inclut PSScriptAnalyzer. Les warnings apparaissent en direct dans l'éditeur (soulignés en vert/jaune).</p>
-<h3 id="corriger-automatiquement">Corriger automatiquement</h3>
-<p>Certaines règles peuvent être auto-corrigées :</p>
-<div class="highlight"><pre><span></span><code><span class="nb">Invoke-ScriptAnalyzer</span> <span class="n">-Path</span> <span class="p">.\</span><span class="n">MonScript</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-Fix</span>
-</code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Workflow recommandé</p>
-<ol>
-<li>Écrire le code.</li>
-<li>Lancer <code>Invoke-ScriptAnalyzer</code>.</li>
-<li>Corriger les warnings <strong>avant</strong> de committer.</li>
-<li>Intégrer PSScriptAnalyzer en CI/CD pour bloquer les PRs avec des violations.</li>
-</ol>
+<p class="admonition-title">Le linter intégré à VSCode</p>
+<p>L'extension <strong>PowerShell</strong> pour VSCode inclut un linter qui analyse votre code en temps réel et souligne les violations de bonnes pratiques directement dans l'éditeur (alias, paramètres positionnels, nommage, etc.).
+Pas besoin d'action supplémentaire : dès que vous installez l'extension, il est actif.</p>
 </div>
-<h3 id="personnaliser-les-regles">Personnaliser les règles</h3>
-<p>Créer un fichier <code>PSScriptAnalyzerSettings.psd1</code> :</p>
-<div class="highlight"><pre><span></span><code><span class="p">@{</span>
-    <span class="n">ExcludeRules</span> <span class="p">=</span> <span class="p">@(</span><span class="s1">&#39;PSAvoidUsingWriteHost&#39;</span><span class="p">)</span>   <span class="c"># Désactiver une règle</span>
-    <span class="n">Severity</span>     <span class="p">=</span> <span class="p">@(</span><span class="s1">&#39;Error&#39;</span><span class="p">,</span><span class="s1">&#39;Warning&#39;</span><span class="p">)</span>         <span class="c"># Ignorer les Info</span>
-<span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nb">Invoke-ScriptAnalyzer</span> <span class="n">-Path</span> <span class="p">.</span> <span class="n">-Settings</span> <span class="p">.\</span><span class="n">PSScriptAnalyzerSettings</span><span class="p">.</span><span class="n">psd1</span>
-</code></pre></div>
 <h2 id="en-resume">En résumé</h2>
 <ul>
 <li>Alias / param positionnels → <strong>jamais dans un script</strong>.</li>
 <li>Nommage : <code>Verb-Noun</code>, PascalCase, singulier.</li>
-<li>Indentation : VSCode le fait pour vous.</li>
+<li>Indentation : VSCode le fait pour vous (<code>Shift+Alt+F</code>).</li>
 <li><code>Write-Host</code> → interdit dans les fonctions réutilisables, acceptable dans les scripts interactifs.</li>
-<li><strong>PSScriptAnalyzer</strong> : activé dès le début, corrigé avant commit.</li>
+<li>VSCode souligne les violations en temps réel — corrigez avant de committer.</li>
 </ul>
 
 

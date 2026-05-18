@@ -106,7 +106,6 @@ $Liste -ne $null    # → @("A", "B")  (filtre les nulls)
 
 !!! tip "Bonne pratique"
     Toujours mettre `$null` à gauche de l'opérateur de comparaison.
-    PSScriptAnalyzer signale automatiquement les violations de cette règle (`PSPossibleIncorrectComparisonWithNull`).
 
 ## Variables d'environnement
 
@@ -120,4 +119,4 @@ $env:TEMP           # Dossier temporaire
 $env:PATH           # Chemins exécutables (séparés par ; sous Windows)
 ```
 
-Pour tout lister : `Get-ChildItem Env:`.
+Pour tout lister : `Get-ChildItem Env:`

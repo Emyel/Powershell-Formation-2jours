@@ -1,4 +1,3 @@
-
 # Opérateurs
 
 Vue d'ensemble compacte des opérateurs PowerShell. Une cheat-sheet à conserver.
@@ -18,10 +17,40 @@ Vue d'ensemble compacte des opérateurs PowerShell. Une cheat-sheet à conserver
 | `-eq` | Égalité (insensible à la casse par défaut) |
 | `-like` | Wildcard (`*` et `?`) — `"Texte" -like "Text*"` |
 | `-match` | Regex — `$_ -match "^A"` |
-| `-contains` | Présence d'une valeur dans une liste |
 
 Préfixer par `c` rend sensible à la casse : `-ceq`, `-clike`, ...
 Préfixer par `not` inverse : `-notlike`, `-notmatch`, ...
+
+## Comparaison de collections
+
+| Opérateur | Description |
+| --- | --- |
+| `-contains` | La collection **contient-elle** cette valeur ? (membre à droite) |
+| `-notcontains` | Inverse de `-contains` |
+| `-in` | La valeur est-elle **dans** cette collection ? (membre à gauche) |
+| `-notin` | Inverse de `-in` |
+
+```powershell
+$Serveurs = "SRV01", "SRV02", "SRV03"
+
+$Serveurs -contains "SRV02"   # → $true
+"SRV02" -in $Serveurs         # → $true  (syntaxe alternative, plus lisible)
+
+$Serveurs -contains "SRV99"   # → $false
+```
+
+!!! tip "`-contains` vs `-match`"
+    `-contains` teste la **présence d'un élément dans une collection** — ce n'est pas un opérateur de chaîne.
+    Pour chercher une sous-chaîne, utilisez `-like` ou `-match` :
+
+    ```powershell
+    # ❌ Ne fait pas ce qu'on croit — teste si le tableau contient exactement "SRV"
+    "SRV01", "SRV02" -contains "SRV"   # → $false
+
+    # ✅ Chercher une sous-chaîne dans une chaîne
+    "SRV01" -like "*SRV*"   # → $true
+    "SRV01" -match "SRV"    # → $true
+    ```
 
 ## Logique
 
@@ -38,11 +67,11 @@ Préfixer par `not` inverse : `-notlike`, `-notmatch`, ...
 "Le héros s'appelle Zelda !" -replace "Zelda","Link"
 # → "Le héros s'appelle Link !"
 
-"nom.prenom@societe.com" -split "@"
-# → @("nom.prenom","societe.com")
+"charles.dieu@nyxen.com" -split "@"
+# → @("charles.dieu","nyxen.com")
 
-"nom.prenom","societe.com" -join "@"
-# → "nom.prenom@societe.com"
+"charles.dieu","nyxen.com" -join "@"
+# → "charles.dieu@nyxen.com"
 ```
 
 ### Opérateur de formatage `-f`
