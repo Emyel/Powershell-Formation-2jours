@@ -902,6 +902,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mesurer-la-performance-measure-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mesurer la performance — Measure-Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#recommande-affecter-la-boucle-directement" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -955,6 +966,17 @@
     <span class="md-ellipsis">
       
         Préférences par canal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enregistrer-une-session-complete-start-transcript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enregistrer une session complète — Start-Transcript
       
     </span>
   </a>
@@ -1360,6 +1382,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zz_annexes/pour_aller_plus_loin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aller plus loin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1428,6 +1478,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mesurer-la-performance-measure-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mesurer la performance — Measure-Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#recommande-affecter-la-boucle-directement" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1487,6 +1548,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#enregistrer-une-session-complete-start-transcript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enregistrer une session complète — Start-Transcript
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1531,6 +1603,28 @@
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>Pourquoi c'est mauvais ?</strong> Les arrays .NET sont <strong>immutables</strong>. Chaque <code>+=</code> recrée un nouveau tableau et recopie tous les éléments précédents → <strong>O(n²)</strong>. Sur 10 000 éléments, c'est catastrophique.</p>
+<h3 id="mesurer-la-performance-measure-command">Mesurer la performance — <code>Measure-Command</code></h3>
+<p><code>Measure-Command</code> permet de chronométrer l'exécution d'une commande ou d'un bloc de code.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Méthode inefficace</span>
+<span class="nb">Measure-Command</span> <span class="p">{</span>
+    <span class="nv">$Result</span> <span class="p">=</span> <span class="p">@()</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">1</span><span class="p">..</span><span class="n">1000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$Result</span> <span class="p">+=</span> <span class="nv">$i</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>TotalMilliseconds : 287.4532
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># Méthode efficace</span>
+<span class="nb">Measure-Command</span> <span class="p">{</span>
+    <span class="nv">$Result</span> <span class="p">=</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">1</span><span class="p">..</span><span class="n">1000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$i</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>TotalMilliseconds : 4.2156
+</code></pre></div>
+<p><strong>Résultat</strong> : l'affectation directe est <strong>70× plus rapide</strong> sur 1000 éléments. L'écart empire avec la taille.</p>
 <h3 id="recommande-affecter-la-boucle-directement">✅ Recommandé : affecter la boucle directement</h3>
 <div class="highlight"><pre><span></span><code><span class="nv">$Result</span> <span class="p">=</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$Computer</span> <span class="k">in</span> <span class="nv">$ComputerList</span><span class="p">)</span> <span class="p">{</span>
     <span class="nb">Get-ComputerInfo</span> <span class="n">-ComputerName</span> <span class="nv">$Computer</span>
@@ -1634,20 +1728,45 @@
 <p>Ou via les paramètres des commandes :</p>
 <div class="highlight"><pre><span></span><code><span class="nb">Get-Example</span> <span class="n">-Verbose</span> <span class="n">-WarningAction</span> <span class="n">SilentlyContinue</span> <span class="n">-InformationAction</span> <span class="k">Continue</span>
 </code></pre></div>
+<h2 id="enregistrer-une-session-complete-start-transcript">Enregistrer une session complète — <code>Start-Transcript</code></h2>
+<p><code>Start-Transcript</code> enregistre <strong>tout</strong> ce qui se passe dans la console dans un fichier texte : les commandes, les sorties, les erreurs.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Start-Transcript</span> <span class="n">-Path</span> <span class="s2">&quot;C:\Logs\Session_</span><span class="p">$(</span><span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s1">&#39;yyyyMMdd_HHmmss&#39;</span><span class="p">)</span><span class="s2">.txt&quot;</span>
+
+<span class="c"># Vos commandes ici</span>
+<span class="nb">Get-Service</span>
+<span class="nb">Get-Process</span>
+
+<span class="nb">Stop-Transcript</span>
+</code></pre></div>
+<p><strong>Cas d'usage</strong> :
+- <strong>Audit</strong> : garder une trace complète d'une intervention manuelle.
+- <strong>Debugging</strong> : capturer un problème intermittent.
+- <strong>Formation</strong> : enregistrer une démo complète.</p>
+<p><strong>Bonnes pratiques</strong> :
+- Toujours encadrer dans un <code>try/finally</code> pour garantir l'appel à <code>Stop-Transcript</code> même en cas d'erreur.
+- Nommer le fichier avec un timestamp pour éviter les écrasements.</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span> <span class="p">{</span>
+    <span class="nb">Start-Transcript</span> <span class="n">-Path</span> <span class="s2">&quot;$HOME\Logs\</span><span class="p">$(</span><span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s1">&#39;yyyyMMdd_HHmmss&#39;</span><span class="p">)</span><span class="s2">.txt&quot;</span>
+
+    <span class="c"># Votre code ici</span>
+
+<span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+    <span class="nb">Stop-Transcript</span>
+<span class="p">}</span>
+</code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Pourquoi c'est important</p>
+<p>Ces canaux structurent la sortie de votre code. Un script de production émet du <strong>Verbose</strong> pour le suivi, des <strong>Warning</strong> pour signaler des anomalies non bloquantes, des <strong>Error</strong> pour les échecs, et retourne des <strong>objets</strong> dans le canal Success. Jamais de <code>Write-Host</code> en prod.</p>
 </div>
-<blockquote>
-<p>Pourquoi c'est important
-Ces canaux structurent la sortie de votre code. Un script de production émet du <strong>Verbose</strong> pour le suivi, des <strong>Warning</strong> pour signaler des anomalies non bloquantes, des <strong>Error</strong> pour les échecs, et retourne des <strong>objets</strong> dans le canal Success. Jamais de <code>Write-Host</code> en prod.
-!!!</p>
-</blockquote>
 
 
 
 
 
 
+
+  
+  
 
 
 

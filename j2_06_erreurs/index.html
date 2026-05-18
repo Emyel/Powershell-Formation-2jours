@@ -978,6 +978,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#gerer-les-programmes-externes-lastexitcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gérer les programmes externes — $LASTEXITCODE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gérer les programmes externes — $LASTEXITCODE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le problème
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-solution-lastexitcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La solution — $LASTEXITCODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-complet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemple complet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#difference-avec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Différence avec $?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1349,6 +1410,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zz_annexes/pour_aller_plus_loin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aller plus loin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1465,6 +1554,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#gerer-les-programmes-externes-lastexitcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gérer les programmes externes — $LASTEXITCODE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gérer les programmes externes — $LASTEXITCODE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le problème
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-solution-lastexitcode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La solution — $LASTEXITCODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-complet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemple complet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#difference-avec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Différence avec $?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1488,9 +1638,9 @@
 <h1 id="gestion-derreurs-try-catch-finally">Gestion d'erreurs — Try / Catch / Finally</h1>
 <h2 id="types-derreurs">Types d'erreurs</h2>
 <p>PowerShell distingue deux types :</p>
-<p><strong>Non-Terminating</strong>
+<p><strong>Non-Terminating</strong><br />
 Une erreur est émise mais le code continue.</p>
-<p><strong>Terminating</strong>
+<p><strong>Terminating</strong><br />
 L'erreur arrête immédiatement l'exécution.</p>
 <h2 id="erroraction-erroractionpreference">ErrorAction &amp; ErrorActionPreference</h2>
 <table>
@@ -1524,13 +1674,9 @@ L'erreur arrête immédiatement l'exécution.</p>
 </tbody>
 </table>
 <div class="admonition danger">
-<p class="admonition-title">Danger</p>
+<p class="admonition-title">Erreur fréquente</p>
+<p>Mettre <code>$ErrorActionPreference = "SilentlyContinue"</code> en tête de script pour "éviter les erreurs" est une <strong>anti-pattern</strong>. On masque les vrais problèmes au lieu de les gérer.</p>
 </div>
-<blockquote>
-<p>Erreur fréquente
-Mettre <code>$ErrorActionPreference = "SilentlyContinue"</code> en tête de script pour "éviter les erreurs" est une <strong>anti-pattern</strong>. On masque les vrais problèmes au lieu de les gérer.
-!!!</p>
-</blockquote>
 <h2 id="try-catch-principe">Try / Catch — principe</h2>
 <p>Pour gérer les erreurs <strong>Terminating</strong>, on les encadre dans un bloc <code>Try / Catch</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="nv">$ComputerList</span> <span class="p">=</span> <span class="s2">&quot;OfflineComputer&quot;</span><span class="p">,</span><span class="s2">&quot;WKS02&quot;</span>
@@ -1589,19 +1735,84 @@ Mettre <code>$ErrorActionPreference = "SilentlyContinue"</code> en tête de scri
 <span class="p">}</span>
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Piège classique</p>
+<p>On oublie souvent le <code>Finally</code> alors qu'il est crucial pour éviter les fuites de ressources (sessions, connexions, fichiers ouverts, etc.).</p>
 </div>
-<blockquote>
-<p>Piège classique
-On oublie souvent le <code>Finally</code> alors qu'il est crucial pour éviter les fuites de ressources (sessions, connexions, fichiers ouverts, etc.).
-!!!</p>
-</blockquote>
+<h2 id="gerer-les-programmes-externes-lastexitcode">Gérer les programmes externes — <code>$LASTEXITCODE</code></h2>
+<p>PowerShell gère ses propres erreurs avec <code>Try/Catch</code>, mais quand vous appelez un <strong>programme externe</strong> (<code>.exe</code>, <code>.bat</code>, utilitaires système), il faut vérifier manuellement son <strong>code de retour</strong>.</p>
+<h3 id="le-probleme">Le problème</h3>
+<div class="highlight"><pre><span></span><code><span class="n">robocopy</span> <span class="n">C</span><span class="p">:\</span><span class="n">Source</span> <span class="n">D</span><span class="p">:\</span><span class="n">Destination</span> <span class="p">/</span><span class="n">MIR</span>
+</code></pre></div>
+<p>Même si <code>robocopy</code> échoue, PowerShell ne déclenche <strong>aucune exception</strong>. Le script continue comme si de rien n'était.</p>
+<h3 id="la-solution-lastexitcode">La solution — <code>$LASTEXITCODE</code></h3>
+<p>Après chaque appel à un programme externe, PowerShell stocke son code de retour dans <code>$LASTEXITCODE</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">robocopy</span> <span class="n">C</span><span class="p">:\</span><span class="n">Source</span> <span class="n">D</span><span class="p">:\</span><span class="n">Destination</span> <span class="p">/</span><span class="n">MIR</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-ge</span> <span class="n">8</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="s2">&quot;Robocopy a échoué avec le code $LASTEXITCODE&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Codes de retour Robocopy</strong> :
+- <code>0-7</code> : Succès (avec ou sans fichiers copiés)
+- <code>8+</code> : Échec</p>
+<h3 id="exemple-complet">Exemple complet</h3>
+<div class="highlight"><pre><span></span><code><span class="k">function</span> <span class="nb">Invoke-Robocopy</span> <span class="p">{</span>
+    <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
+    <span class="k">param</span> <span class="p">(</span>
+        <span class="no">[string]</span><span class="nv">$Source</span><span class="p">,</span>
+        <span class="no">[string]</span><span class="nv">$Destination</span>
+    <span class="p">)</span>
+
+    <span class="nb">Write-Verbose</span> <span class="s2">&quot;Copie de $Source vers $Destination&quot;</span>
+
+    <span class="n">robocopy</span> <span class="nv">$Source</span> <span class="nv">$Destination</span> <span class="p">/</span><span class="n">MIR</span> <span class="p">/</span><span class="n">R</span><span class="p">:</span><span class="n">3</span> <span class="p">/</span><span class="n">W</span><span class="p">:</span><span class="n">5</span> <span class="p">/</span><span class="n">NP</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-ge</span> <span class="n">8</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="s2">&quot;Robocopy a échoué (code $LASTEXITCODE)&quot;</span>
+    <span class="p">}</span>
+
+    <span class="nb">Write-Verbose</span> <span class="s2">&quot;Copie terminée (code $LASTEXITCODE)&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="difference-avec">Différence avec <code>$?</code></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$?</code></td>
+<td><code>$true</code> si la <strong>dernière commande PowerShell</strong> a réussi, <code>$false</code> sinon.</td>
+</tr>
+<tr>
+<td><code>$LASTEXITCODE</code></td>
+<td>Code de retour numérique du <strong>dernier programme externe</strong> exécuté.</td>
+</tr>
+</tbody>
+</table>
+<p><code>$?</code> ne fonctionne <strong>pas</strong> pour les programmes externes — utilisez toujours <code>$LASTEXITCODE</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Cas courants nécessitant $LASTEXITCODE</p>
+<ul>
+<li><code>robocopy</code>, <code>xcopy</code></li>
+<li><code>git</code>, <code>svn</code></li>
+<li><code>netsh</code>, <code>wmic</code></li>
+<li><code>msiexec</code>, <code>setup.exe</code></li>
+<li>Scripts <code>.bat</code> / <code>.cmd</code></li>
+</ul>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 
