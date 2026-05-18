@@ -1428,8 +1428,7 @@
 <p><strong>Inputs</strong> — paramètres validés, typés, nommés.
 <strong>Outputs</strong> — données structurées en objets, retour cohérent.
 <strong>Contrôles</strong> — gestion d'erreurs, verbosité, debug.</p>
-<div class="highlight"><pre><span></span><code><span class="k">function</span> <span class="n">Verb-Noun</span>
-<span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">function</span> <span class="n">Verb-Noun</span> <span class="p">{</span>
     <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
     <span class="k">param</span> <span class="p">(</span>
         <span class="c"># === INPUTS : paramètres validés ===</span>
@@ -1437,34 +1436,22 @@
         <span class="no">[string]</span><span class="nv">$ComputerName</span>
     <span class="p">)</span>
 
-    <span class="k">begin</span> <span class="p">{</span>
-        <span class="c"># === CONTRÔLES : initialisation, logs ===</span>
-        <span class="nb">Write-Verbose</span> <span class="s2">&quot;Start </span><span class="p">$(</span><span class="nv">$MyInvocation</span><span class="p">.</span><span class="n">MyCommand</span><span class="p">)</span><span class="s2">&quot;</span>
-    <span class="p">}</span>
+    <span class="c"># === CŒUR DU CODE ===</span>
+    <span class="nv">$Data</span> <span class="p">=</span> <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$ComputerName</span> <span class="n">-ClassName</span> <span class="n">Win32_OperatingSystem</span>
 
-    <span class="k">process</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="c"># === CŒUR DU CODE ===</span>
-            <span class="nv">$Data</span> <span class="p">=</span> <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$ComputerName</span> <span class="n">-ClassName</span> <span class="p">...</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
-
-            <span class="c"># === OUTPUTS : un objet structuré ===</span>
-            <span class="no">[PSCustomObject]</span><span class="p">@{</span>
-                <span class="n">ComputerName</span> <span class="p">=</span> <span class="nv">$ComputerName</span>
-                <span class="n">Property1</span>    <span class="p">=</span> <span class="nv">$Data</span><span class="p">.</span><span class="n">Property1</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">catch</span> <span class="p">{</span>
-            <span class="c"># === CONTRÔLES : gestion d&#39;erreur ===</span>
-            <span class="nb">Write-Warning</span> <span class="s2">&quot;Échec pour $ComputerName : </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="n">Message</span><span class="p">)</span><span class="s2">&quot;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">end</span> <span class="p">{</span>
-        <span class="nb">Write-Verbose</span> <span class="s2">&quot;End </span><span class="p">$(</span><span class="nv">$MyInvocation</span><span class="p">.</span><span class="n">MyCommand</span><span class="p">)</span><span class="s2">&quot;</span>
+    <span class="c"># === OUTPUTS : un objet structuré ===</span>
+    <span class="no">[PSCustomObject]</span><span class="p">@{</span>
+        <span class="n">ComputerName</span> <span class="p">=</span> <span class="nv">$ComputerName</span>
+        <span class="n">OSVersion</span>    <span class="p">=</span> <span class="nv">$Data</span><span class="p">.</span><span class="n">Caption</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>C'est <strong>ce squelette</strong> qu'on va remplir progressivement dans les chapitres suivants : paramètres validés, outputs en <code>PSCustomObject</code>, canaux Verbose/Warning, Try/Catch, etc.</p>
+<div class="admonition note">
+<p class="admonition-title">Et la gestion d'erreurs ? Et le pipeline ?</p>
+<p>Ce squelette est volontairement simplifié. Dans les pages suivantes,
+on va l'enrichir avec les blocs <code>begin</code>/<code>process</code>/<code>end</code>,
+<code>ValueFromPipeline</code>, <code>Try/Catch</code> et les canaux <code>Verbose</code>/<code>Warning</code>.</p>
+</div>
 <h2 id="fonction-ou-script">Fonction ou script ?</h2>
 <p><strong>Fonction</strong>
 Mono-tâche, spécialisée, réutilisable dans n'importe quel contexte.</p>
