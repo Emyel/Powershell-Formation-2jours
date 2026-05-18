@@ -558,6 +558,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparaison-de-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparaison de collections
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#logique" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1435,6 +1446,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparaison-de-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparaison de collections
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#logique" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1561,14 +1583,56 @@
 <td><code>-match</code></td>
 <td>Regex — <code>$_ -match "^A"</code></td>
 </tr>
-<tr>
-<td><code>-contains</code></td>
-<td>Présence d'une valeur dans une liste</td>
-</tr>
 </tbody>
 </table>
 <p>Préfixer par <code>c</code> rend sensible à la casse : <code>-ceq</code>, <code>-clike</code>, ...
 Préfixer par <code>not</code> inverse : <code>-notlike</code>, <code>-notmatch</code>, ...</p>
+<h2 id="comparaison-de-collections">Comparaison de collections</h2>
+<table>
+<thead>
+<tr>
+<th>Opérateur</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-contains</code></td>
+<td>La collection <strong>contient-elle</strong> cette valeur ? (membre à droite)</td>
+</tr>
+<tr>
+<td><code>-notcontains</code></td>
+<td>Inverse de <code>-contains</code></td>
+</tr>
+<tr>
+<td><code>-in</code></td>
+<td>La valeur est-elle <strong>dans</strong> cette collection ? (membre à gauche)</td>
+</tr>
+<tr>
+<td><code>-notin</code></td>
+<td>Inverse de <code>-in</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nv">$Serveurs</span> <span class="p">=</span> <span class="s2">&quot;SRV01&quot;</span><span class="p">,</span> <span class="s2">&quot;SRV02&quot;</span><span class="p">,</span> <span class="s2">&quot;SRV03&quot;</span>
+
+<span class="nv">$Serveurs</span> <span class="o">-contains</span> <span class="s2">&quot;SRV02&quot;</span>   <span class="c"># → $true</span>
+<span class="s2">&quot;SRV02&quot;</span> <span class="n">-in</span> <span class="nv">$Serveurs</span>         <span class="c"># → $true  (syntaxe alternative, plus lisible)</span>
+
+<span class="nv">$Serveurs</span> <span class="o">-contains</span> <span class="s2">&quot;SRV99&quot;</span>   <span class="c"># → $false</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title"><code>-contains</code> vs <code>-match</code></p>
+<p><code>-contains</code> teste la <strong>présence d'un élément dans une collection</strong> — ce n'est pas un opérateur de chaîne.
+Pour chercher une sous-chaîne, utilisez <code>-like</code> ou <code>-match</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="c"># ❌ Ne fait pas ce qu&#39;on croit — teste si le tableau contient exactement &quot;SRV&quot;</span>
+<span class="s2">&quot;SRV01&quot;</span><span class="p">,</span> <span class="s2">&quot;SRV02&quot;</span> <span class="o">-contains</span> <span class="s2">&quot;SRV&quot;</span>   <span class="c"># → $false</span>
+
+<span class="c"># ✅ Chercher une sous-chaîne dans une chaîne</span>
+<span class="s2">&quot;SRV01&quot;</span> <span class="o">-like</span> <span class="s2">&quot;*SRV*&quot;</span>   <span class="c"># → $true</span>
+<span class="s2">&quot;SRV01&quot;</span> <span class="o">-match</span> <span class="s2">&quot;SRV&quot;</span>    <span class="c"># → $true</span>
+</code></pre></div>
+</div>
 <h2 id="logique">Logique</h2>
 <table>
 <thead>
@@ -1600,11 +1664,11 @@ Préfixer par <code>not</code> inverse : <code>-notlike</code>, <code>-notmatch<
 <div class="highlight"><pre><span></span><code><span class="s2">&quot;Le héros s&#39;appelle Zelda !&quot;</span> <span class="o">-replace</span> <span class="s2">&quot;Zelda&quot;</span><span class="p">,</span><span class="s2">&quot;Link&quot;</span>
 <span class="c"># → &quot;Le héros s&#39;appelle Link !&quot;</span>
 
-<span class="s2">&quot;nom.prenom@societe.com&quot;</span> <span class="n">-split</span> <span class="s2">&quot;@&quot;</span>
-<span class="c"># → @(&quot;nom.prenom&quot;,&quot;societe.com&quot;)</span>
+<span class="s2">&quot;charles.dieu@nyxen.com&quot;</span> <span class="n">-split</span> <span class="s2">&quot;@&quot;</span>
+<span class="c"># → @(&quot;charles.dieu&quot;,&quot;nyxen.com&quot;)</span>
 
-<span class="s2">&quot;nom.prenom&quot;</span><span class="p">,</span><span class="s2">&quot;societe.com&quot;</span> <span class="n">-join</span> <span class="s2">&quot;@&quot;</span>
-<span class="c"># → &quot;nom.prenom@societe.com&quot;</span>
+<span class="s2">&quot;charles.dieu&quot;</span><span class="p">,</span><span class="s2">&quot;nyxen.com&quot;</span> <span class="n">-join</span> <span class="s2">&quot;@&quot;</span>
+<span class="c"># → &quot;charles.dieu@nyxen.com&quot;</span>
 </code></pre></div>
 <h3 id="operateur-de-formatage-f">Opérateur de formatage <code>-f</code></h3>
 <p>Très utile, souvent oublié.</p>

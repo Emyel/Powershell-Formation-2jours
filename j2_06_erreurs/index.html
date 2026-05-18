@@ -1679,6 +1679,23 @@ L'erreur arrête immédiatement l'exécution.</p>
 <p class="admonition-title">Erreur fréquente</p>
 <p>Mettre <code>$ErrorActionPreference = "SilentlyContinue"</code> en tête de script pour "éviter les erreurs" est une <strong>anti-pattern</strong>. On masque les vrais problèmes au lieu de les gérer.</p>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Bonne pratique — que mettre globalement ?</p>
+<p>Laisser <code>$ErrorActionPreference</code> à sa valeur par défaut (<code>Continue</code>) et gérer <code>-ErrorAction Stop</code> <strong>au cas par cas</strong> sur les commandes critiques, à l'intérieur d'un <code>Try/Catch</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># ❌ À éviter — transforme toutes les erreurs en exceptions,</span>
+<span class="c">#    y compris celles que vous ne voulez pas intercepter</span>
+<span class="nv">$ErrorActionPreference</span> <span class="p">=</span> <span class="s1">&#39;Stop&#39;</span>
+
+<span class="c"># ✅ Recommandé — cibler uniquement les commandes critiques</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$Computer</span> <span class="n">-ClassName</span> <span class="n">Win32_OperatingSystem</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">{</span>
+    <span class="nb">Write-Warning</span> <span class="s2">&quot;Échec pour $Computer : </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="n">Message</span><span class="p">)</span><span class="s2">&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exception légitime : un script court et entièrement encadré dans un <code>try/catch</code> global peut utiliser <code>$ErrorActionPreference = 'Stop'</code> pour simplifier le code — à condition que le <code>catch</code> soit présent et utile.</p>
+</div>
 <h2 id="try-catch-principe">Try / Catch — principe</h2>
 <p>Pour gérer les erreurs <strong>Terminating</strong>, on les encadre dans un bloc <code>Try / Catch</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="nv">$ComputerList</span> <span class="p">=</span> <span class="s2">&quot;OfflineComputer&quot;</span><span class="p">,</span><span class="s2">&quot;WKS02&quot;</span>
@@ -1686,7 +1703,7 @@ L'erreur arrête immédiatement l'exécution.</p>
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$Computer</span> <span class="k">in</span> <span class="nv">$ComputerList</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
         <span class="nv">$OS</span> <span class="p">=</span> <span class="nb">Get-CimInstance</span> <span class="n">-ComputerName</span> <span class="nv">$Computer</span> <span class="n">-ClassName</span> <span class="n">Win32_OperatingSystem</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
-        <span class="nb">Write-Host</span> <span class="s2">&quot;✅ $Computer : </span><span class="p">$(</span><span class="nv">$OS</span><span class="p">.</span><span class="n">Caption</span><span class="p">)</span><span class="s2">&quot;</span>
+        <span class="nb">Write-Verbose</span> <span class="s2">&quot;✅ $Computer : </span><span class="p">$(</span><span class="nv">$OS</span><span class="p">.</span><span class="n">Caption</span><span class="p">)</span><span class="s2">&quot;</span>
     <span class="p">}</span>
     <span class="k">catch</span> <span class="p">{</span>
         <span class="nb">Write-Warning</span> <span class="s2">&quot;❌ Échec pour $Computer : </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="n">Message</span><span class="p">)</span><span class="s2">&quot;</span>
